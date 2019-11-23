@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d819548d-dc85-4514-bc70-3c8a00b3326f" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1SVSLgDUCc1jMUJMMfqMFhnJN9Z" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.HeapSort (1)">
+    <configuration name="HeapSort (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sort.HeapSort" />
+      <module name="AlgorithmTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sort.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HeapSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="HeapSort" />
+      <module name="AlgorithmTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InsertionSort (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sort.InsertionSort" />
+      <module name="AlgorithmTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sort.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MergeSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MergeSort" />
+      <module name="AlgorithmTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuickSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="QuickSort" />
+      <module name="AlgorithmTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HeapSort (1)" />
+        <item itemvalue="Application.InsertionSort (1)" />
+        <item itemvalue="Application.HeapSort" />
+        <item itemvalue="Application.QuickSort" />
+        <item itemvalue="Application.MergeSort" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d819548d-dc85-4514-bc70-3c8a00b3326f" name="Default Changelist" comment="" />
+      <created>1571647215389</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1571647215389</updated>
+      <workItem from="1571647218708" duration="4929000" />
+      <workItem from="1571711131842" duration="3817000" />
+      <workItem from="1571733877023" duration="601000" />
+      <workItem from="1571815741256" duration="929000" />
+      <workItem from="1571882548212" duration="4848000" />
+      <workItem from="1571965937939" duration="2487000" />
+      <workItem from="1571978483094" duration="5143000" />
+      <workItem from="1572067336109" duration="1371000" />
+      <workItem from="1572264961986" duration="2220000" />
+      <workItem from="1572313026770" duration="4143000" />
+      <workItem from="1572323809485" duration="3777000" />
+      <workItem from="1572338127921" duration="9717000" />
+      <workItem from="1572421839815" duration="1336000" />
+      <workItem from="1572698242263" duration="719000" />
+      <workItem from="1572862893474" duration="34000" />
+      <workItem from="1573310021368" duration="227000" />
+      <workItem from="1573388408509" duration="770000" />
+      <workItem from="1573477983414" duration="1998000" />
+      <workItem from="1573522271285" duration="3695000" />
+      <workItem from="1573632473150" duration="2151000" />
+      <workItem from="1573693414082" duration="236000" />
+      <workItem from="1573975955621" duration="20000" />
+      <workItem from="1574073007947" duration="7865000" />
+      <workItem from="1574127531272" duration="1208000" />
+      <workItem from="1574160359691" duration="3131000" />
+      <workItem from="1574213684245" duration="10599000" />
+      <workItem from="1574302825793" duration="34000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
