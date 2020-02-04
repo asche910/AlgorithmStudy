@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d819548d-dc85-4514-bc70-3c8a00b3326f" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="d819548d-dc85-4514-bc70-3c8a00b3326f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/string/Compression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlgorithmTest/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AlgorithmTest/Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlgorithmTest/sort/BubbleSort.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AlgorithmTest/sort/BubbleSort.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AlgorithmTest/sort/QuickSort.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AlgorithmTest/sort/QuickSort.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sort/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sort/QuickSort.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,25 +23,24 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1SVSLgDUCc1jMUJMMfqMFhnJN9Z" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="abbreviatePackageNames" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.HeapSort (1)">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="HeapSort (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sort.HeapSort" />
       <module name="AlgorithmTest" />
@@ -67,13 +74,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MergeSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MergeSort" />
-      <module name="AlgorithmTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="QuickSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="QuickSort" />
       <module name="AlgorithmTest" />
@@ -81,15 +81,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="AlgorithmTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.HeapSort (1)" />
         <item itemvalue="Application.InsertionSort (1)" />
         <item itemvalue="Application.HeapSort" />
         <item itemvalue="Application.QuickSort" />
-        <item itemvalue="Application.MergeSort" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -128,10 +147,85 @@
       <workItem from="1574160359691" duration="3131000" />
       <workItem from="1574213684245" duration="10599000" />
       <workItem from="1574302825793" duration="34000" />
+      <workItem from="1574485537591" duration="6809000" />
+      <workItem from="1574593788732" duration="1827000" />
+      <workItem from="1574671721318" duration="5546000" />
+      <workItem from="1574734062150" duration="157000" />
+      <workItem from="1574764316557" duration="3605000" />
+      <workItem from="1575464079690" duration="846000" />
+      <workItem from="1575511778556" duration="117000" />
+      <workItem from="1580450110026" duration="5986000" />
+      <workItem from="1580550613664" duration="6047000" />
+      <workItem from="1580617511001" duration="1900000" />
+      <workItem from="1580709188282" duration="4547000" />
+      <workItem from="1580790861369" duration="10244000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1493" height="202" key="GridCell.Tab.0.bottom" timestamp="1580804914342">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="202" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580804914342" />
+    <state width="1493" height="202" key="GridCell.Tab.0.center" timestamp="1580804914342">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="202" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580804914342" />
+    <state width="1493" height="202" key="GridCell.Tab.0.left" timestamp="1580804914342">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="202" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580804914342" />
+    <state width="1493" height="202" key="GridCell.Tab.0.right" timestamp="1580804914342">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="202" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580804914342" />
+    <state width="1493" height="252" key="GridCell.Tab.1.bottom" timestamp="1580802179552">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580802179552" />
+    <state width="1493" height="252" key="GridCell.Tab.1.center" timestamp="1580802179551">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580802179551" />
+    <state width="1493" height="252" key="GridCell.Tab.1.left" timestamp="1580802179551">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580802179551" />
+    <state width="1493" height="252" key="GridCell.Tab.1.right" timestamp="1580802179551">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="252" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580802179551" />
+    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1580710885828">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1580710885828" />
+    <state width="688" height="500" key="javadoc.popup.new" timestamp="1580805281422">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="688" height="500" key="javadoc.popup.new/0.0.1536.824@0.0.1536.824" timestamp="1580805281422" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1580456296182">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1580456296182" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1580801311395">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580801311395" />
   </component>
 </project>

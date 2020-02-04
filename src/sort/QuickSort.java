@@ -2,7 +2,10 @@ package sort;
 
 import tool.Tools;
 
+import javax.tools.Tool;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class QuickSort {
 
@@ -35,5 +38,4 @@ public class QuickSort {
         quickSort(nums, start, i - 1);
         quickSort(nums, i + 1, end);
     }
-
 }
