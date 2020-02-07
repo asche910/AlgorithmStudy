@@ -7,7 +7,7 @@ package other;
  */
 public class LongestValidParentheses {
     public static void main(String[] args) {
-        System.out.println(longestValidParentheses(")()())"));
+        System.out.println(longestValidParentheses("(()"));
     }
 
     /**
@@ -22,26 +22,26 @@ public class LongestValidParentheses {
                 left++;
             }else{
                 right++;
-                if(right == left){
-                    max = Math.max(max, left * 2);
-                }else if(right > left){
-                    left = 0;
-                    right = 0;
-                }
+            }
+            if(right == left){
+                max = Math.max(max, left * 2);
+            }else if(right > left){
+                left = 0;
+                right = 0;
             }
         }
-
+        left = right = 0;
         for(int i = str.length() - 1; i >= 0; i--){
             if(str.charAt(i) == '('){
                 left++;
             }else{
                 right++;
-                if(right == left){
-                    max = Math.max(max, left * 2);
-                }else if(left > right){
-                    left = 0;
-                    right = 0;
-                }
+            }
+            if(right == left){
+                max = Math.max(max, left * 2);
+            }else if(left > right){
+                left = 0;
+                right = 0;
             }
         }
         return max;
