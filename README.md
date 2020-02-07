@@ -1,3 +1,3 @@
 # AlgorithmTest
 
-Some common algorithm.
+Some common algorithms.
