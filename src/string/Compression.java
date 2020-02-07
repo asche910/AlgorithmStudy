@@ -4,6 +4,7 @@ package string;
  * 字符串压缩算法
  * Input: HG[3|B[2|CA]]F
  * Output: HGBCACABCACABCACAF
+ *
  * 注意并列（外层和内层）的情况
  * @link https://www.nowcoder.com/questionTerminal/c27561e5b7e0441493adb9a54071888d
  */
