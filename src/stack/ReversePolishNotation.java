@@ -11,7 +11,7 @@ import java.util.Stack;
 public class ReversePolishNotation {
     public static void main(String[] args) {
 
-        System.out.println(strToExpression("1+(4+5+2)-3"));
+        System.out.println(strToExpression("2*3*4"));
 //        System.out.println(strToExpression("(6+2*(1+2))*4"));
 
 //        List<String> list = strToExpression("(6+2*(1+2))*4");
@@ -55,6 +55,10 @@ public class ReversePolishNotation {
                         String peek = stack.peek();
                         if (peek.equals("*") || peek.equals("/")) {
                             list.add(stack.pop());
+                            if(stack.isEmpty()){
+                                stack.push(String.valueOf(ch));
+                                break;
+                            }
                         } else {
                             stack.push(String.valueOf(ch));
                             break;
