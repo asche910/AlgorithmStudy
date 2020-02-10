@@ -7,6 +7,8 @@ import java.util.Stack;
 
 /**
  * 逆波兰表达式算法
+ *
+ * @link https://www.cnblogs.com/lulipro/p/7450886.html
  */
 public class ReversePolishNotation {
     public static void main(String[] args) {
@@ -23,6 +25,8 @@ public class ReversePolishNotation {
 
     /**
      * 中缀表达式转化为后缀表达式
+     *
+     * Node：栈中若有相邻的运算符，则下层的优先级一定小于上层的
      */
     public static List<String> strToExpression(String str) {
         List<String> list = new ArrayList<>();
@@ -87,5 +91,33 @@ public class ReversePolishNotation {
             list.add(stack.pop());
         }
         return list;
+    }
+
+    /**
+     * 后缀表达式求值
+     */
+    public static int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for(String str: tokens){
+            switch(str){
+                case "/":
+                    int n1 = stack.pop();
+                    int n2 = stack.pop();
+                    stack.push(n2 / n1);
+                    break;
+                case "*":
+                    stack.push(stack.pop() * stack.pop());
+                    break;
+                case "-":
+                    stack.push(-stack.pop() + stack.pop());
+                    break;
+                case "+":
+                    stack.push(stack.pop() + stack.pop());
+                    break;
+                default :
+                    stack.push(Integer.parseInt(str));
+            }
+        }
+        return stack.pop();
     }
 }

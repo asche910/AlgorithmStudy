@@ -14,18 +14,16 @@ public class ShellSort {
     }
 
     public static void shellSort(int[] nums){
-        int gap = nums.length / 2;
-        while (gap > 0){
-            for(int i = gap; i < nums.length; i += gap){
-                int j = i;
-                int target = nums[i];
-                while (j > 0 && target < nums[j - gap]){
-                    nums[j] = nums[j - gap];
+        for (int gap = nums.length / 2; gap >= 1; gap /= 2) {
+            for (int i = gap; i < nums.length; i += gap) {
+                int temp = nums[i];
+                int j = i - gap;
+                while (j >= 0 && temp < nums[j]) {
+                    nums[j + gap] = nums[j];
                     j -= gap;
                 }
-                nums[j] = target;
+                nums[j + gap] = temp;
             }
-            gap /= 2;
         }
     }
 }

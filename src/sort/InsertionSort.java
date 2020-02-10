@@ -15,14 +15,13 @@ public class InsertionSort {
 
     public static void insertionSort(int[] nums){
         for(int i = 1; i < nums.length; i++){
-            int j = i;
-            int target = nums[j];
-            while(j > 0 && target < nums[j - 1]){
-                nums[j] = nums[j - 1];
+            int target = nums[i];
+            int j = i - 1;
+            while(j >= 0 && target < nums[j]){
+                nums[j + 1] = nums[j];
                 j--;
             }
-            nums[j] = target;
-            // 3, 5, 6, 4
+            nums[j + 1] = target;
         }
     }
 }
