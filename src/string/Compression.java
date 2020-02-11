@@ -6,7 +6,7 @@ package string;
  * Output: HGBCACABCACABCACAF
  *
  * 注意并列（外层和内层）的情况
- * @link https://www.nowcoder.com/questionTerminal/c27561e5b7e0441493adb9a54071888d
+ * @see <a href="https://www.nowcoder.com/questionTerminal/c27561e5b7e0441493adb9a54071888d">Here</a>
  */
 public class Compression {
     public static void main(String[] args) {

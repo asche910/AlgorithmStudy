@@ -8,7 +8,7 @@ import java.util.Stack;
 /**
  * 逆波兰表达式算法
  *
- * @link https://www.cnblogs.com/lulipro/p/7450886.html
+ * @see <a href="https://www.cnblogs.com/lulipro/p/7450886.html">Here</a>
  */
 public class ReversePolishNotation {
     public static void main(String[] args) {

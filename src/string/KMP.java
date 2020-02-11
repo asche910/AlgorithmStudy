@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * 关键在于求next数组
  *
- * @link https://blog.csdn.net/v_JULY_v/article/details/7041827
+ * @see <a href="https://blog.csdn.net/v_JULY_v/article/details/7041827">Here</a>
  */
 public class KMP {
     public static void main(String[] args) {
