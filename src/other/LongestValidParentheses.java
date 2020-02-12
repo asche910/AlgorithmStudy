@@ -3,7 +3,7 @@ package other;
 /**
  * 32. 最长有效括号
  *
- * @link https://leetcode-cn.com/problems/longest-valid-parentheses/solution/zui-chang-you-xiao-gua-hao-by-leetcode/
+ * @see <a href="https://leetcode-cn.com/problems/longest-valid-parentheses/solution/zui-chang-you-xiao-gua-hao-by-leetcode/">Here</a>
  */
 public class LongestValidParentheses {
     public static void main(String[] args) {
