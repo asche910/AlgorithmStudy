@@ -48,7 +48,7 @@ public class KMP {
                     next[j] = k; // 未加if前仅有这一行
                 }else{
                     //因为不能出现p[j] = p[ next[j ]]，所以当出现时需要继续递归，k = next[k] = next[next[k]]
-                    next[j] = next[next[k]];
+                    next[j] = next[k];
                 }
             }else{
                 k = next[k];
