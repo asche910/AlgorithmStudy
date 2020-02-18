@@ -19,16 +19,13 @@ public class MergeSort {
     }
 
     private static void mergeSort(int[] nums, int low, int high) {
-        if (low >= high) return;
-        int mid = (low + high) / 2;
+        if (low == high) return;
+        int mid = (low + high) >> 1;
         mergeSort(nums, low, mid);
         mergeSort(nums, mid + 1, high);
         merge(nums, low, mid, high);
     }
 
-    /**
-     * 传入nums数组是为了直接在原数组上操作，但仍需要额外空间
-     */
     private static void merge(int[] nums, int low, int mid, int high) {
         int[] arr = new int[high - low + 1];
         int index = 0;
@@ -47,6 +44,6 @@ public class MergeSort {
         while (j <= high) {
             arr[index++] = nums[j++];
         }
-        System.arraycopy(arr, 0, nums, 0, high - low + 1);
+        System.arraycopy(arr, 0, nums, low, high - low + 1);
     }
 }
