@@ -10,11 +10,13 @@ package string;
  */
 public class Compression {
     public static void main(String[] args) {
-        System.out.println(tar("HG[2|  B[2|CA]Q  [2|W]  ]F"));
+        System.out.println(tar("HG[2|B[2|CA]Q[2|W]]F"));
+//        System.out.println(tar("HG[2|  B[2|CA]Q  [2|W]  ]F"));
 
     }
 
-    public static String tar(String src) {
+    public static String tar(String str) {
+        StringBuilder src = new StringBuilder(str);
         int index = 0;
         while (index < src.length()) {
             if (src.charAt(index) == ']') {
@@ -31,11 +33,11 @@ public class Compression {
                 for (int m = 0; m < num; m++) {
                     builder.append(subStr);
                 }
-                src = src.replace(src.substring(i, index + 1), builder.toString());
+                src.replace(i, index + 1, builder.toString());
                 index = j - 1;
             }
             index++;
         }
-        return src;
+        return src.toString();
     }
 }
