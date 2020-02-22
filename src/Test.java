@@ -8,9 +8,11 @@ public class Test {
     public static void main(String[] args) throws IOException {
         System.out.println("Test...");
 
-        int[] nums = new int[]{3, 2, 4, 1, 5, 0};
-        new Test().heapSort(nums);
-        System.out.println(Arrays.toString(nums));
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        queue.offer(3);
+        queue.offer(1);
+        queue.offer(2);
+        System.out.println(queue.poll());
     }
 
     public void heapSort(int[] nums){
