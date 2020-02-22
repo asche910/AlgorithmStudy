@@ -1,27 +1,44 @@
 import tool.Tools;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class Test {
     public static void main(String[] args) throws IOException {
         System.out.println("Test...");
-        int[] nums = new int[]{3, 2, 4, 1, 5, 0};
-        selectionSort(nums);
-    }
 
-    public static void selectionSort(int[] nums){
-        for(int i = 0; i < nums.length - 1; i++){
-            int min = i;
-            for(int j = i + 1; j < nums.length; j++){
-                if(nums[j] < nums[min]){
-                    min = j;
-                }
-            }
-            Tools.swap(nums, min, i);
-        }
+        int[] nums = new int[]{3, 2, 4, 1, 5, 0};
+        new Test().heapSort(nums);
         System.out.println(Arrays.toString(nums));
     }
 
+    public void heapSort(int[] nums){
+        int len = nums.length;
+        for(int i = len / 2 - 1; i >= 0; i--){
+            heapify(nums, i, len - 1);
+        }
+        System.out.println(Arrays.toString(nums));
+
+
+        for(int i = len - 1; i > 0; i--){
+            Tools.swap(nums, 0, i);
+            heapify(nums, 0, i - 1);
+        }
+    }
+
+    private void heapify(int[] nums, int start, int end){
+        int root = start;
+        while(root * 2 + 1 <= end){
+            int child = 2 * root + 1;
+            if (child + 1 <= end && nums[child + 1] > nums[child]) child++;
+            if(nums[root] < nums[child]){
+                Tools.swap(nums, root, child);
+                root = child;
+            }else{
+                root = end;
+            }
+        }
+    }
 }
 

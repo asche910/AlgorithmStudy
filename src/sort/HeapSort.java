@@ -18,7 +18,7 @@ public class HeapSort {
     public static void heapSort(int[] nums){
         int len = nums.length;
         // 构造堆，对非叶子节点heapify（不能从低到高遍历）
-        for(int i = (len - 2) / 2; i >= 0; i--){
+        for(int i = len / 2  - 1; i >= 0; i--){
             heapify(nums, i, len - 1);
         }
 
@@ -30,25 +30,20 @@ public class HeapSort {
     }
 
     /**
-     * heapify nums from i to m
+     * heapify nums from start to end
      */
-    private static void heapify(int[] nums, int i, int m){
-        int j;
-        while(i * 2 + 1 <= m){
+    private static void heapify(int[] nums, int start, int end){
+        int root = start;
+        while(root * 2 + 1 <= end){
             // 左孩子的索引
-            j = i * 2 + 1;
-            if(j < m){
-                // 找到两个孩子中的最大者索引
-                if(nums[j] < nums[j + 1]){
-                    j++;
-                }
-            }
+            int child = root * 2 + 1;
+            // 找到两个孩子中的最大者索引
+            if(child + 1 <= end && nums[child] < nums[child + 1]) child++;
             // 孩子节点大于父节点则交换，否则结束操作
-            if(nums[i] < nums[j]){
-                Tools.swap(nums, i, j);
-                i = j;
-            }else {
-                i = m;
+            if(nums[root] < nums[child]){
+                Tools.swap(nums, root, child);
+            }else{
+                root = end;
             }
         }
     }

@@ -13,7 +13,7 @@ public class ShellSort {
         System.out.println(Arrays.toString(nums));
     }
 
-    public static void shellSort(int[] nums){
+    protected static void shellSort(int[] nums){
         for (int gap = nums.length / 2; gap >= 1; gap /= 2) {
             for (int i = gap; i < nums.length; i++) {
                 int temp = nums[i];
