@@ -1,46 +1,49 @@
+import com.sun.jmx.snmp.tasks.ThreadService;
+import sun.plugin2.jvm.ProxyJVMLauncher;
 import tool.Tools;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Test {
+    int size = 0;
+    int cap = 10;
+    Lock lock = new ReentrantLock();
+    Condition notFull = lock.newCondition();
+    Condition notEmpty = lock.newCondition();
+
     public static void main(String[] args) throws IOException {
         System.out.println("Test...");
+        Test test = new Test();
 
-        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
-        queue.offer(3);
-        queue.offer(1);
-        queue.offer(2);
-        System.out.println(queue.poll());
+
+
+        Set<Integer> set = new HashSet<>();
+
+
     }
 
-    public void heapSort(int[] nums){
-        int len = nums.length;
-        for(int i = len / 2 - 1; i >= 0; i--){
-            heapify(nums, i, len - 1);
+
+    public int findMinArrowShots(int[][] points) {
+        if (points.length == 0) {
+            return 0;
         }
-        System.out.println(Arrays.toString(nums));
-
-
-        for(int i = len - 1; i > 0; i--){
-            Tools.swap(nums, 0, i);
-            heapify(nums, 0, i - 1);
-        }
-    }
-
-    private void heapify(int[] nums, int start, int end){
-        int root = start;
-        while(root * 2 + 1 <= end){
-            int child = 2 * root + 1;
-            if (child + 1 <= end && nums[child + 1] > nums[child]) child++;
-            if(nums[root] < nums[child]){
-                Tools.swap(nums, root, child);
-                root = child;
-            }else{
-                root = end;
+        Arrays.sort(points, Comparator.comparingInt(o -> o[1]));
+        int cnt = 1, end = points[0][1];
+        for (int i = 1; i < points.length; i++) {
+            if (points[i][0] <= end) {
+                continue;
             }
+            cnt++;
+            end = points[i][1];
         }
+        return cnt;
     }
 }
-
