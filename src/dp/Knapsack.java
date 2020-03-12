@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 /**
  * 0-1背包问题
+ * 现有n件物品和一个容量为c的背包。第i件物品的重量是重量为w[i]，价值是v[i]。
+ * 求放置哪些物品进背包，可使这些物品的重量总和不超过背包容量，且价值总和最大。
  * 递推：物品由少增多，价值由少增多
  *
  * @see <a href="https://www.nowcoder.com/discuss/3574?type=all&order=time&pos=&page=1">Nowcoder</a>

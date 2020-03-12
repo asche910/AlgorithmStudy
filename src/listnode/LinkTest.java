@@ -1,7 +1,6 @@
-import java.util.Arrays;
+package listnode;
+
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
 
 public class LinkTest {
     public static void main(String[] args) {
@@ -14,7 +13,6 @@ public class LinkTest {
         head.next = node1;
         node1.next = node2;
         node2.next = node3;
-
 
         System.out.println(intToRoman(1994));
     }
@@ -57,26 +55,6 @@ public class LinkTest {
                     flag = 1;
                 }
             }
-        }
-        return builder.toString();
-    }
-}
-
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder(val + "  ");
-        ListNode temp = next;
-        while (temp != null) {
-            builder.append(temp.val).append("  ");
-            temp = temp.next;
         }
         return builder.toString();
     }

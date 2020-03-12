@@ -1,9 +1,9 @@
+package tool;
+
 import java.util.Scanner;
 
-public class Test {
-
+public class InputTemplate {
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
         int M, N;
         while (scanner.hasNextInt()) {
