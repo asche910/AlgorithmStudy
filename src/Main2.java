@@ -1,21 +1,23 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Main2 {
     public static void main(String[] args) {
-        int check = check(100);
-        System.out.println(check);
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextInt()) {
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            String[] strs = new String[n];
+            for (int i = 0; i < n; i++) {
+                strs[i] = sc.next();
+            }
+            char[][] map = new char[n][];
+            for (int i = 0; i < n; i++) {
+                map[i] = strs[i].toCharArray();
+            }
+
+            System.out.println(-1);
+        }
     }
 
-    public static int check(int n) {
-        int count = 0;
-        for (int j = 2; j * j <= n; j++) {
-            while (n % j == 0) {
-                n /= j;
-                System.out.println(n + " " + j);
-                count++;
-            }
-        }
-        if (n > 1) count++;
-        return count;
-    }
+//    private void reverse(char[][] map )
 }
