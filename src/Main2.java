@@ -2,6 +2,11 @@ import java.util.Scanner;
 
 public class Main2 {
     public static void main(String[] args) {
+
+        int a = 2;
+        a >>>= 1;
+        System.out.println(a);
+
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextInt()) {
             int n = sc.nextInt();
@@ -19,5 +24,4 @@ public class Main2 {
         }
     }
 
-//    private void reverse(char[][] map )
 }

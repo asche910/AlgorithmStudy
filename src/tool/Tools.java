@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Tools {
 
+    public static int[][] DIRS = new int[][]{{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
     public static void swap(int[] nums, int i, int j){
         int temp = nums[i];
         nums[i] = nums[j];
