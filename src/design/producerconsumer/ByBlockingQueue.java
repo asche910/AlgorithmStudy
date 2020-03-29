@@ -1,17 +1,13 @@
+package design.producerconsumer;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-public class Main {
+public class ByBlockingQueue {
     volatile static int size;
     static int capacity = 10;
 
-    static Semaphore mutex = new Semaphore(1);
-    static Semaphore notFull = new Semaphore(capacity);
-    static Semaphore notEmpty = new Semaphore(0);
+    static final BlockingQueue<Integer> blockingQueue = new ArrayBlockingQueue<>(capacity);
 
     public static void main(String[] args) {
         new Producer().start();
@@ -31,16 +27,11 @@ public class Main {
                 }
 
                 try {
-                    notFull.acquire();
-                    mutex.acquire();
-
+                    blockingQueue.put(1);
                     size++;
                     System.out.println("produce, cur: " + size);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }finally {
-                    notEmpty.release();
-                    mutex.release();
                 }
             }
         }
@@ -57,16 +48,11 @@ public class Main {
                 }
 
                 try {
-                    notEmpty.acquire();
-                    mutex.acquire();
-
+                    blockingQueue.take();
                     size--;
                     System.out.println("consume, cur: " + size);
                 } catch (Exception e) {
                     e.printStackTrace();
-                }finally {
-                    notFull.release();
-                    mutex.release();
                 }
             }
         }

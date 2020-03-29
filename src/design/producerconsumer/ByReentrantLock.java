@@ -1,17 +1,17 @@
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Semaphore;
+package design.producerconsumer;
+
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Main {
+public class ByReentrantLock {
+
+    static Lock lock = new ReentrantLock();
+    static Condition notFull = lock.newCondition();
+    static Condition notEmpty = lock.newCondition();
+
     volatile static int size;
     static int capacity = 10;
-
-    static Semaphore mutex = new Semaphore(1);
-    static Semaphore notFull = new Semaphore(capacity);
-    static Semaphore notEmpty = new Semaphore(0);
 
     public static void main(String[] args) {
         new Producer().start();
@@ -31,16 +31,17 @@ public class Main {
                 }
 
                 try {
-                    notFull.acquire();
-                    mutex.acquire();
-
+                    lock.lock();
+                    while (size == capacity) {
+                        notFull.await();
+                    }
                     size++;
                     System.out.println("produce, cur: " + size);
+                    notEmpty.signalAll();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }finally {
-                    notEmpty.release();
-                    mutex.release();
+                } finally {
+                    lock.unlock();
                 }
             }
         }
@@ -57,16 +58,17 @@ public class Main {
                 }
 
                 try {
-                    notEmpty.acquire();
-                    mutex.acquire();
-
+                    lock.lock();
+                    while (size == 0) {
+                        notEmpty.await();
+                    }
                     size--;
                     System.out.println("consume, cur: " + size);
+                    notFull.signalAll();
                 } catch (Exception e) {
                     e.printStackTrace();
-                }finally {
-                    notFull.release();
-                    mutex.release();
+                } finally {
+                    lock.unlock();
                 }
             }
         }

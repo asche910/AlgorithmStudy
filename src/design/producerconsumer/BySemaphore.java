@@ -1,11 +1,8 @@
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+package design.producerconsumer;
 
-public class Main {
+import java.util.concurrent.Semaphore;
+
+public class BySemaphore {
     volatile static int size;
     static int capacity = 10;
 
