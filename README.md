@@ -1,3 +1,3 @@
-# AlgorithmTest
+# AlgorithmStudy
 
 Some common algorithms.
