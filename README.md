@@ -14,7 +14,69 @@ Some common algorithms.
 
 ### 递增子序列
 
-[491. Increasing Subsequences](https://leetcode.com/problems/increasing-subsequences/)
+#### [300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
+
+> 给定一数组，求递增子序列的最大长度
+
+常规解法：dp[i]表示以nums[i]结尾的最大递增子序列长度，O(n^2)
+
+```java
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int len = nums.length;
+        if(len < 2) return len;
+        int[] dp = new int[len];
+        Arrays.fill(dp, 1);
+        
+        int res = 0;
+        for(int i = 1; i < len; i++){
+            for(int j = 0; j < i; j++){
+                if(nums[j] < nums[i]) dp[i] = Math.max(dp[i], dp[j] + 1);
+            }
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
+}
+```
+
+巧解：使用tails数组，tails[i]表示长度为`i + 1`的所有最长上升子序列的结尾最小值（因此tails数组并不一定是最长子序列的值）。tails数组大小即为所求。O(n log n)
+
+参考[这里](https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/)
+
+```java
+    public int lengthOfLIS(int[] nums) {
+        int len = nums.length;
+        if (len < 2) return len;
+        int[] tails = new int[len];
+        tails[0] = nums[0];
+        int size = 1;
+        for (int i = 1; i < len; i++) {
+            if (nums[i] > tails[size - 1]) {
+                tails[size++] = nums[i];
+            } else {
+                int low = 0, high = size - 1;
+                while (low < high) {
+                    int mid = (low + high) / 2;
+                    // 注意先后条件，新值插入位置为：第一个大于等于新值的数所在位置
+                    if (nums[i] > tails[mid]) {
+                        low = mid + 1;
+                    } else {
+                        high = mid;
+                    }
+                }
+                tails[low] = nums[i];
+            }
+        }
+        return size;
+    }
+```
+
+
+
+
+
+#### [491. Increasing Subsequences](https://leetcode.com/problems/increasing-subsequences/)
 
 > 求数组中的递增子序列
 
@@ -51,7 +113,7 @@ class Solution {
 
 
 
-[1395. Count Number of Teams](https://leetcode.com/problems/count-number-of-teams/)
+#### [1395. Count Number of Teams](https://leetcode.com/problems/count-number-of-teams/)
 
 > 求递增或递减，且长度为三的子序列个数
 
@@ -103,4 +165,92 @@ class Solution {
     }
 }
 ```
+
+
+
+## Stack
+
+
+
+### 单调栈
+
+#### [739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
+
+> 给定温度数组，返回温度升高需要的天数
+
+单调递减栈的应用
+
+```java
+class Solution {
+    public int[] dailyTemperatures(int[] T) {
+        Stack<Integer> stack = new Stack<>();
+        int[] res = new int[T.length];
+        for(int i = 0; i < T.length; i++){
+            while(!stack.isEmpty() && T[i] > T[stack.peek()]){
+                int idx = stack.pop();
+                res[idx] = i - idx;
+            }
+            stack.push(i);
+        }
+        return res;
+    }
+}
+```
+
+
+
+## Tree
+
+
+
+### 二叉树删除节点
+
+
+
+#### [1325. Delete Leaves With a Given Value](https://leetcode.com/problems/delete-leaves-with-a-given-value/)
+
+> 删除所有叶子节点值为target的节点，新的叶子节点若符合也删除
+
+递归，返回孩子节点（不变或返回null节点）
+
+```java
+class Solution {
+    public TreeNode removeLeafNodes(TreeNode node, int target) {
+        if(node == null || node.val == target && node.left == null && node.right == null){
+            return null;
+        }
+        node.left = removeLeafNodes(node.left, target);
+        node.right = removeLeafNodes(node.right, target);
+        if(node.left == null && node.right == null && node.val == target) return null;
+        return node;   
+    }
+}
+```
+
+
+
+
+
+## Math
+
+#### [738. Monotone Increasing Digits](https://leetcode.com/problems/monotone-increasing-digits/)
+
+> 非负整数N，返回不大于N的数m，且m的各个位上数字呈递增状态
+
+```java
+    public int monotoneIncreasingDigits(int N) {
+        int i = 1, res = N;
+        while(res / 10 >= i) {
+            int n = res / i % 100; // 每次取两个位
+            i *= 10;
+            if(n / 10 > n % 10) // 高位大于低位
+                res = res / i * i - 1; // 低位变0，整体减1
+        }
+        return res;
+    }
+```
+
+
+
+
 

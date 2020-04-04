@@ -38,7 +38,7 @@ public class Main {
                     System.out.println("produce, cur: " + size);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     notEmpty.release();
                     mutex.release();
                 }
@@ -64,7 +64,7 @@ public class Main {
                     System.out.println("consume, cur: " + size);
                 } catch (Exception e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     notFull.release();
                     mutex.release();
                 }
