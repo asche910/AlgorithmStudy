@@ -18,6 +18,7 @@ public class Main {
         new Consumer().start();
         new Producer().start();
         new Consumer().start();
+
     }
 
     static class Producer extends Thread {
