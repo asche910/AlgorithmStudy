@@ -55,4 +55,43 @@ public class NetworkDelayTime {
         }
         return maxDis;
     }
+
+    /**
+     * 简化版 Dijkstra 算法
+     *
+     * 最短距离在原数组上更新
+     */
+    public int networkDelayTime2(int[][] times, int N, int K) {
+        // 用Integer_MAX_VALUE可能会溢出
+        int INF = 1000_000_000;
+        int[][] graph = new int[N + 1][N + 1];
+        for(int i = 1; i <= N; i++){
+            for(int j = 1; j <= N; j++){
+                graph[i][j] = i == j ? 0 : INF;
+            }
+        }
+        graph[K][0] = INF;
+        for(int[] time: times){
+            graph[time[0]][time[1]] = time[2];
+        }
+        boolean[] visited = new boolean[N + 1];
+        int min = K, newMin = 0;
+        while(min > 0){
+            visited[min] = true;
+            for(int j = 1; j <= N; j++){
+                graph[K][j] = Math.min(graph[K][j], graph[K][min] + graph[min][j]);
+                if(!visited[j] && graph[K][j] < graph[K][newMin]){
+                    newMin = j;
+                }
+            }
+            min = newMin;
+            newMin = 0;
+        }
+        int res = -1;
+        for(int j = 1; j <= N; j++){
+            res = Math.max(res, graph[K][j]);
+            if(res == INF) return -1;
+        }
+        return res;
+    }
 }
