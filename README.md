@@ -4,11 +4,55 @@ Some common algorithms.
 
 
 
-
-
-
-
 ## Array
+
+
+
+### Basic
+
+#### [689.Maximum Sum of 3 Non-Overlapping Subarrays](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/)
+
+> 给定一数组，求最大的3个区间和，返回对应区间开始位置
+
+```java
+class Solution {
+    public int[] maxSumOfThreeSubarrays(int[] nums, int k) {
+        int len = nums.length, maxSum = 0;
+        int[] sum = new int[len + 1], posLeft = new int[len], posRight = new int[len], res = new int[3];
+        for(int i = 0; i < nums.length; i++) sum[i + 1] = sum[i] + nums[i];
+        
+        for(int i = k, cur = sum[k] - sum[0]; i < len - 2 * k; i++){
+            if(sum[i + 1] - sum[i + 1 - k] > cur){
+                posLeft[i] = i + 1 - k;
+                cur = sum[i + 1] - sum[i + 1 - k];
+            }else posLeft[i] = posLeft[i - 1];
+        }
+        
+        posRight[len - k] = len- k;
+        for(int i = len - k - 1, cur = sum[len] - sum[len - k]; i >= 2 * k; i--){
+            if(sum[i + k] - sum[i] >= cur){
+                posRight[i] = i;
+                cur = sum[i + k] - sum[i];
+            }else posRight[i] = posRight[i + 1];
+        }
+        
+        for(int i = k; i <= len - 2 * k; i++){
+            int l = posLeft[i - 1], r = posRight[i + k];
+            int cur = (sum[i + k] - sum[i]) + (sum[l + k] - sum[l]) + (sum[r + k] - sum[r]);
+            if(cur > maxSum){
+                maxSum = cur;
+                res[0] = l;
+                res[1] = i;
+                res[2] = r;
+            }
+        }
+        return res;
+    }
+}
+
+```
+
+### 
 
 
 
@@ -168,6 +212,61 @@ class Solution {
 
 
 
+## Bit Manipulation
+
+- ```-1 & n  --> n ```
+  -1 & 1  --> 1
+  -1 % 2  --> -1
+
+- `n & (n - 1)`将最右边一个1变为0
+
+- `n & -n`求得最右边一个1的部分
+
+```
+	6 & -6 = 2
+	   0 0110
+	 & 1 1010
+	 = 0 0010
+```
+
+- `x | (1 << (i-1))`将第i位变为1
+
+
+
+
+
+## Dynamic Programming
+
+[Here](./src/dp/README.md)
+
+
+
+
+## Math
+
+#### [738. Monotone Increasing Digits](https://leetcode.com/problems/monotone-increasing-digits/)
+
+> 非负整数N，返回不大于N的数m，且m的各个位上数字呈递增状态
+
+```java
+    public int monotoneIncreasingDigits(int N) {
+        int i = 1, res = N;
+        while(res / 10 >= i) {
+            int n = res / i % 100; // 每次取两个位
+            i *= 10;
+            if(n / 10 > n % 10) // 高位大于低位
+                res = res / i * i - 1; // 低位变0，整体减1
+        }
+        return res;
+    }
+```
+
+
+
+
+
+
+
 ## Stack
 
 
@@ -226,49 +325,6 @@ class Solution {
     }
 }
 ```
-
-
-
-## Bit Manipulation
-
-- ```-1 & n  --> n ```
-	-1 & 1  --> 1
-	-1 % 2  --> -1
-
-- `n & (n - 1)`将最右边一个1变为0
-
-- `n & -n`求得最右边一个1的部分
-```
-	6 & -6 = 2
-	   0 0110
-	 & 1 1010
-	 = 0 0010
-```
-
-- `x | (1 << (i-1))`将第i位变为1
-
-
-
-
-## Math
-
-#### [738. Monotone Increasing Digits](https://leetcode.com/problems/monotone-increasing-digits/)
-
-> 非负整数N，返回不大于N的数m，且m的各个位上数字呈递增状态
-
-```java
-    public int monotoneIncreasingDigits(int N) {
-        int i = 1, res = N;
-        while(res / 10 >= i) {
-            int n = res / i % 100; // 每次取两个位
-            i *= 10;
-            if(n / 10 > n % 10) // 高位大于低位
-                res = res / i * i - 1; // 低位变0，整体减1
-        }
-        return res;
-    }
-```
-
 
 
 
