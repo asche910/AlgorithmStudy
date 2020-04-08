@@ -233,6 +233,44 @@ class Solution {
 
 
 
+## Depth-first Search
+
+
+
+#### [526. Beautiful Arrangement](https://leetcode-cn.com/problems/beautiful-arrangement/)
+
+> 求优美排列的个数。1-N中，每个位置能够被上面的值整除或整除上面的值
+
+```java
+class Solution {
+    int cnt;
+
+    public int countArrangement(int N) {
+        permute(new boolean[N + 1], 1, N);
+        return cnt;
+    }
+
+    public void permute(boolean[] visited, int cur, int N){
+        if(cur > N){
+            cnt++;
+            return;
+        }
+        for(int i = 1; i <= N; i++){
+            if(!visited[i] && (i % cur == 0 || cur % i == 0)){
+                visited[i] = true;
+                // 注意是cur不是i
+                permute(visited, cur + 1, N);
+                visited[i] = false;
+            }
+        }
+    }
+}
+```
+
+
+
+
+
 
 
 ## Dynamic Programming

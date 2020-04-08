@@ -4,7 +4,7 @@
 
 ## 区间问题
 
-### [516. Longest Palindromic Subsequence](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)
+#### [516. Longest Palindromic Subsequence](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)
 
 > 求给定字符串的最长回文子序列的长度
 
@@ -38,7 +38,7 @@ class Solution {
 
 
 
-### [72. Edit Distance](https://leetcode-cn.com/problems/edit-distance/)
+#### [72. Edit Distance](https://leetcode-cn.com/problems/edit-distance/)
 
 > 给定两字符串，求字符串1经过多少次操作可以变成字符串2，操作包含：删除、修改、添加一个字符
 
@@ -72,7 +72,7 @@ class Solution {
 
 
 
-类似有：
+类似：
 
 [1143. Longest Common Subsequence](https://leetcode-cn.com/problems/longest-common-subsequence/)
 
@@ -122,12 +122,11 @@ class Solution {
 #### [494. Target Sum](https://leetcode-cn.com/problems/target-sum/)
 
 > You are given a list of non-negative integers, a1, a2, ..., an, and a target, S. Now you have 2 symbols + and -. For each integer, you should choose one from + and - as its new symbol.
->
 > Find out how many ways to assign symbols to make sum of integers equal to target S.
->
-> 给定非负数组，返回子集和为S的个数
 
-
+A - B = S
+A + B = Sum  -->  A = (S + sum) / 2
+即给定非负数组，返回子集和为目标值的个数
 
 ```java
 class Solution {
@@ -140,6 +139,7 @@ class Solution {
         int[] dp = new int[w + 1];
         dp[0] = 1;
         for (int num : nums) {
+            // 这里是倒着，正序可能导致同一个硬币使用两次
             for (int j = w; j >= num; j--) {
                 dp[j] += dp[j - num];
             }
@@ -149,5 +149,94 @@ class Solution {
 }
 ```
 
+递推公式中，可理解为**新的硬币**带来的增量，因此不会重复。
 
 
+
+### 完全背包
+
+#### [322. Coin Change](https://leetcode-cn.com/problems/coin-change/)
+
+> 使用最少数量的硬币组成目标值，硬币可重复使用，返回需要的**硬币数量**
+
+```java
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        for(int i = 1; i <= amount; i++){
+            int val = Integer.MAX_VALUE;
+            for(int j = 0; j < coins.length; j++){
+                if(i - coins[j] >= 0 && dp[i - coins[j]] != Integer.MAX_VALUE){
+                    val = Math.min(val, dp[i - coins[j]] + 1);
+                }
+            }
+            dp[i] = val;
+        }
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+    }
+}
+```
+
+
+
+####  [518. Coin Change 2](https://leetcode-cn.com/problems/coin-change-2/)
+
+> 使用硬币组成目标值，硬币可重复使用，返回**组合方案数量**
+
+```java
+class Solution {
+    public int change(int amount, int[] coins) {
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+        for(int coin: coins){
+            for(int j = 1; j <= amount; j++){
+                if(j >= coin){
+                    dp[j] += dp[j - coin];
+                }
+            }
+        }
+        return dp[amount];
+    }
+}
+```
+
+
+
+
+
+## 状态压缩
+
+
+
+#### [526. Beautiful Arrangement](https://leetcode-cn.com/problems/beautiful-arrangement/)
+
+> 求优美排列的个数。1-N中，每个位置能够被上面的值整除或整除上面的值
+
+```java
+class Solution {
+    public int countArrangement(int N) {
+        int[] dp = new int[1 << N];
+        for(int i = 0; i < N; i++) dp[1 << i] = 1;
+        int res = 0;
+        for(int i = 1; i < 1 << N; i++){
+            if(dp[i] == 0) continue;
+            int pos = 0;
+            for(int j = 0; j < N; j++){
+                if((i & (1 << j)) != 0) pos++;
+            }
+            for(int j = 0; j < N; j++){
+                if((i & (1 << j)) == 0 && ((pos + 1) % (j + 1) == 0 || (j + 1) % (pos + 1) == 0)){
+                    dp[i | 1 << j] += dp[i];
+                }
+            }
+        }
+        return dp[(1 << N) - 1];
+    }
+}
+```
+
+
+
+More：
+
+464,935,1349
