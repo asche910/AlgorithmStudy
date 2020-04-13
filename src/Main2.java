@@ -1,27 +1,23 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main2 {
     public static void main(String[] args) {
+//        handle(new int[]{1, 4, 3, 3}, 4);
 
-        int a = 2;
-        a >>>= 1;
-        System.out.println(a);
+        Scanner in = new Scanner(System.in);
+//        int m = in.nextInt();
 
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextInt()) {
-            int n = sc.nextInt();
-            int m = sc.nextInt();
-            String[] strs = new String[n];
+        while (in.hasNextInt()) {
+            int n = in.nextInt();
+            int[] arr = new int[n];
             for (int i = 0; i < n; i++) {
-                strs[i] = sc.next();
+                arr[i] = in.nextInt();
             }
-            char[][] map = new char[n][];
-            for (int i = 0; i < n; i++) {
-                map[i] = strs[i].toCharArray();
-            }
-
-            System.out.println(-1);
+            handle(arr, n);
         }
     }
 
+    private static void handle(int[] arr, int n) {
+        System.out.println(4);
+    }
 }

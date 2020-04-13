@@ -309,6 +309,33 @@ class Solution {
 
 
 
+* n个不同的数进栈，出栈顺序种数有：` C(2n, n) / (n + 1)`
+
+
+
+### 模拟操作
+
+#### 检查出栈顺序合法性
+
+```java
+    private static boolean check(int[] in, int[] out){
+        int i = 0, j = 0;
+        Stack<Integer> stack = new Stack<>();
+        for (; i < in.length; i++) {
+            stack.push(in[i]);
+            while (!stack.isEmpty() && stack.peek() == out[j]){
+                stack.pop();
+                j++;
+            }
+        }
+        return i == j;
+    }
+```
+
+
+
+
+
 ### 单调栈
 
 #### [739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
