@@ -1,0 +1,1 @@
+some common tool functions for c++

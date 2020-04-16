@@ -338,11 +338,17 @@ class Solution {
 
 ### 单调栈
 
+
+
+* 单调栈中，形成单调递增/减子序列
+
+
+
 #### [739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
 
 > 给定温度数组，返回温度升高需要的天数
 
-单调递减栈的应用
+单调递减栈的应用，寻找下一个更大的数
 
 ```java
 class Solution {
@@ -360,6 +366,51 @@ class Solution {
     }
 }
 ```
+
+
+
+#### [逛街](https://www.nowcoder.com/questionTerminal/35fac8d69f314e958a150c141894ef6a)
+
+> 判断每个位置能够看到的高楼数量。比所在楼低或者高但没有更高的挡住。
+>
+> ```
+> Input:
+> 6
+> 5 3 8 3 2 5
+> Output:
+> 3 3 5 4 4 4
+> ```
+
+判断每个位置左右两边的**递增子序列**的长度，再加上1（自己）即为所求
+
+```c++
+int main() {
+	int n, nums[100002];
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> nums[i];
+	}
+	vector<int> arr(n);
+	stack<int> s1, s2;
+	for (int i = n - 1; i >= 0; i--) {
+		arr[i] = s1.size();
+		while (!s1.empty() && nums[s1.top()] <= nums[i]) {
+			s1.pop();
+		}
+		s1.push(i);
+	}
+
+	for (int i = 0; i < n; i++) {
+		arr[i] += s2.size() + 1;
+		while (!s2.empty() && nums[s2.top()] <= nums[i]) s2.pop();
+		s2.push(i);
+		cout << arr[i] << " ";
+	}
+	return 0;
+}
+```
+
+
 
 
 
