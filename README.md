@@ -237,6 +237,8 @@ class Solution {
 
 
 
+
+
 #### [526. Beautiful Arrangement](https://leetcode-cn.com/problems/beautiful-arrangement/)
 
 > 求优美排列的个数。1-N中，每个位置能够被上面的值整除或整除上面的值
@@ -267,6 +269,45 @@ class Solution {
 }
 ```
 
+### 全排列
+
+#### [47. 全排列 II](https://leetcode-cn.com/problems/permutations-ii/)
+
+> 给定可能重复的数字序列，求所有不重复的全排列
+
+经典回溯算法
+
+```c++
+class Solution {
+    vector<vector<int>> res;
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        dfs(nums, 0);
+        return res;
+    }
+
+    void dfs(vector<int>& nums, int cur) {
+        if (cur == nums.size()) {
+            res.push_back(nums);
+            return;
+        }
+        for (int i = cur; i < nums.size(); i++) {
+            if (!check(nums, cur, i)) continue;
+            swap(nums[cur], nums[i]);
+            dfs(nums, cur + 1);
+            swap(nums[cur], nums[i]);
+        }
+    }
+
+    bool check(vector<int>& nums, int start, int end) {
+        for (int i = start; i < end; i++) {
+            if (nums[i] == nums[end]) return false;
+        }
+        return true;
+    }
+};
+```
+
 
 
 
@@ -279,8 +320,21 @@ class Solution {
 
 
 
+## Heap
+
+
+
+
+
+
 
 ## Math
+
+
+
+* 判断n是否是素数，判断`[2,sqrt(n)]`内的数是否能整除n
+
+
 
 #### [738. Monotone Increasing Digits](https://leetcode.com/problems/monotone-increasing-digits/)
 
@@ -296,6 +350,34 @@ class Solution {
                 res = res / i * i - 1; // 低位变0，整体减1
         }
         return res;
+    }
+```
+
+
+
+
+
+### 矩形相交
+
+
+
+
+
+#### [223. 矩形面积](https://leetcode-cn.com/problems/rectangle-area/)
+
+> 给出两个矩形坐标，求重叠后所有的面积
+
+关键在于交点坐标，高的最小值，底的最大值
+
+```c++
+    int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+        int area1 = (C - A) * (D - B), area2 = (G - E) * (H - F);
+        if (C <= E || F >= D || B >= H || A >= G) {
+            return area1 + area2; 
+        }
+        int topX = min(G, C), topY = min(H, D);
+        int bottomX = max(E, A), bottomY = max(B, F);
+        return area1 - (topX - bottomX) * (topY - bottomY) + area2;
     }
 ```
 
