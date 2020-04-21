@@ -320,6 +320,49 @@ public:
 
 
 
+## Hash Table
+
+
+
+
+
+### 连续子数组
+
+* 前缀和
+
+
+
+#### [560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)
+
+> 给定一个整数数组和一个整数 **k，**你需要找到该数组中和为 **k** 的连续的子数组的个数。
+
+使用**前缀和**求解
+
+```c++
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> sumMap;
+        sumMap[0] = 1;
+        int sum = 0, res = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            sum += nums[i];
+            res += sumMap[sum - k];
+            sumMap[sum]++;
+        }
+        return res;
+    }
+};
+```
+
+类似有
+
+[1248. 统计「优美子数组」](https://leetcode-cn.com/problems/count-number-of-nice-subarrays/)
+
+
+
+
+
 ## Heap
 
 

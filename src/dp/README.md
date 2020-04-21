@@ -92,6 +92,12 @@ class Solution {
 
 ### 0-1 背包
 
+* 0-1背包，由于金币有限，为防止金币重复使用，循环金币时应该逆序
+
+* 初始化`dp[0] = 1;` 
+
+
+
 #### [416. Partition Equal Subset Sum](https://leetcode-cn.com/problems/partition-equal-subset-sum/)
 
 > 给定正整数数组，判断能否分成两个和相等的子集
@@ -114,6 +120,15 @@ class Solution {
             }
             if(dp[sum] == 1) return true;
         }
+/* c++
+        for (auto& i : nums) {
+        	// 这里逆序
+            for (int j = sum - i; j >= 0; j--) {
+                dp[j + i] |= dp[j];
+            }
+            if (dp[sum]) return true;
+        }
+*/
         return dp[sum] == 1;
     }
 }
@@ -137,6 +152,7 @@ class Solution {
         
         int w = (sum + S) / 2;
         int[] dp = new int[w + 1];
+        // 初始化，很重要
         dp[0] = 1;
         for (int num : nums) {
             // 这里是倒着，正序可能导致同一个硬币使用两次
@@ -154,6 +170,10 @@ class Solution {
 
 
 ### 完全背包
+
+* 金币无限，一般情况金币放在内层循环
+
+
 
 #### [322. Coin Change](https://leetcode-cn.com/problems/coin-change/)
 
@@ -179,25 +199,48 @@ class Solution {
 
 
 
+```c++
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        vector<int> dp(amount + 1);
+        for (int i = 1; i <= amount; i++) {
+            int val = INT_MAX;
+            for (auto& j : coins) {
+                if (i - j >= 0 && dp[i - j] != INT_MAX)
+                    val = min(val, dp[i - j] + 1);
+            }
+            dp[i] = val;
+        }
+        return dp[amount] == INT_MAX ? -1 : dp[amount];
+    }
+};
+```
+
+
+
+
+
 ####  [518. Coin Change 2](https://leetcode-cn.com/problems/coin-change-2/)
 
 > 使用硬币组成目标值，硬币可重复使用，返回**组合方案数量**
 
-```java
+
+
+```c++
 class Solution {
-    public int change(int amount, int[] coins) {
-        int[] dp = new int[amount + 1];
+public:
+    int change(int amount, vector<int>& coins) {
+        vector<int> dp(amount + 1);
         dp[0] = 1;
-        for(int coin: coins){
-            for(int j = 1; j <= amount; j++){
-                if(j >= coin){
-                    dp[j] += dp[j - coin];
-                }
+        for (auto& i : coins) {
+            for (int j = i; j <= amount; j++) {
+                dp[j] += dp[j - i];
             }
         }
         return dp[amount];
     }
-}
+};
 ```
 
 
