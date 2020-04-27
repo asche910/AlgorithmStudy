@@ -367,6 +367,42 @@ public:
 
 
 
+### 区间重叠
+
+
+
+#### 253. Meeting Rooms II
+
+> Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],...] (si < ei), find the minimum number of conference rooms required.
+>
+> For example,
+> Given [[0, 30],[5, 10],[15, 20]],
+> return 2.
+
+即求最大重叠区间的个数：对**起始时间**进行排序，使用**最小堆**来记录当前会议的**结束时间**，当新会议的**开始时间**小于最小堆中最早的结束时间，说明该区间重叠。
+
+```c++
+class Solution {
+public:
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end());
+        priority_queue<int, vector<int>, greater<int>> q;
+        int cnt = 0;
+        for (auto& i : intervals) {
+            q.push(i[1]);
+            if (i[0] < q.top()) ++cnt;
+            else q.pop();
+        }
+        return cnt;
+    }
+};
+
+```
+
+
+
+
+
 
 
 
