@@ -12,5 +12,14 @@
         end = str.find(delim, start);
     }
     res.emplace_back(str.substr(start));
+
     return res;
 }
+
+ vector<int> input(string str) {
+     vector<int> res;
+     for (auto& i : split(str.substr(1, str.size() - 1), ",")) {
+         res.emplace_back(stoi(i));
+     }
+     return res;
+ }
