@@ -462,6 +462,43 @@ public:
 
 
 
+## Segment Tree
+
+
+
+#### [307. 区域和检索 - 数组可修改](https://leetcode-cn.com/problems/range-sum-query-mutable/)
+
+```c++
+class NumArray {
+    int n;
+    vector<int> tree;
+public:
+    NumArray(vector<int>& nums) : n(nums.size()), tree(n << 1) {
+        for (int i = n, j = 0; j < n; ++i, ++j) tree[i] = nums[j];
+        for (int i = n - 1; i > 0; --i) tree[i] = tree[i << 1] + tree[(i << 1) + 1];
+    }
+
+    void update(int i, int val) {
+        i += n;
+        val -= tree[i];
+        while (i) {
+            tree[i] += val;
+            i >>= 1;
+        }
+    }
+
+    int sumRange(int i, int j) {
+        int res = 0;
+        for (i += n, j += n; i <= j; i >>= 1, j >>= 1) {
+            if (i & 1) res += tree[i++];
+            if(!(j & 1)) res += tree[j--];
+        }
+        return res;
+    }
+};
+
+```
+
 
 
 

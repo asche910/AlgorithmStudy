@@ -7,15 +7,16 @@ package math;
  */
 public class PrimeFactors {
     public static void main(String[] args) {
-        System.out.println(getPrimeFactors(120));
+        System.out.println(getPrimeFactors(240));
     }
 
     public static int getPrimeFactors(int n){
         int count = 0;
         for (int j = 2; j * j <= n; j++) {
             while (n % j == 0) {
+                System.out.println(j + " " + n);
+
                 n /= j;
-//                System.out.println(n + " " + j);
                 count++;
             }
         }
