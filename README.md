@@ -320,6 +320,79 @@ public:
 
 
 
+
+
+## Greedy
+
+
+
+### 求字典排序最小的结果
+
+使用**栈**，新进来的元素，先和栈顶比较，符合某种条件则弹出栈顶元素，再入栈
+
+
+
+#### [316. 去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)
+
+> 删除重复字母，使其只出现一次，并且最终结果字典序最小
+
+```c++
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        string stk;
+        for (int i = 0; i < s.size(); ++i) {
+            if(stk.find(s[i]) != string::npos) continue;
+            while (!stk.empty() && stk.back() > s[i] &&
+                s.find(stk.back(), i) != string::npos) {
+                stk.pop_back();
+            }
+            stk.push_back(s[i]);
+        }
+        return stk;
+    }
+};
+```
+
+
+
+
+
+#### [402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)
+
+> 给定一个以字符串表示的非负整数 *num*，移除这个数中的 *k* 位数字，使得剩下的数字最小。
+
+```c++
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        if (k >= num.size()) return "0";
+        string stk;
+        for (int i = 0; i < num.size(); i++) {
+            while (!stk.empty() && stk.back() > num[i] && k) {
+                stk.pop_back();
+                k--;
+            }
+            stk.push_back(num[i]);
+        }
+        while(k--) {
+            stk.pop_back();
+        }
+        while(!stk.empty() && stk[0] == '0') {
+            stk.erase(stk.begin());
+        }
+        return stk.empty() ? "0" : stk;
+    }
+};
+
+```
+
+
+
+
+
+
+
 ## Hash Table
 
 
