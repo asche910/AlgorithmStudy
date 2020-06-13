@@ -217,9 +217,7 @@ class Solution {
 - ```-1 & n  --> n ```
   -1 & 1  --> 1
   -1 % 2  --> -1
-
 - `n & (n - 1)`将最右边一个1变为0
-
 - `n & -n`求得最右边一个1的部分
 
 ```
@@ -230,6 +228,7 @@ class Solution {
 ```
 
 - `x | (1 << (i-1))`将第i位变为1
+-  `~`为二进制取反运算符， `x ^ 0 = x` 、`x ^ 1 = -（~x）`
 
 
 
@@ -386,6 +385,47 @@ public:
 };
 
 ```
+
+
+
+
+
+
+
+### 相邻元素的约束
+
+相邻元素拥有制约关系，则可采取先左右扫描，再贪心结合
+
+#### [135. Candy](https://leetcode.com/problems/candy/)
+
+左右扫描，取两次的最大值
+
+```c++
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        int len = ratings.size();
+        vector<int> left(len), right(len);
+        for(int i = 1; i < len; ++i){
+            if(ratings[i] > ratings[i - 1]){
+                left[i] = left[i - 1] + 1;
+            }
+        }
+        for(int i = len - 2; i >= 0; --i){
+            if(ratings[i] > ratings[i + 1]){
+                right[i] = right[i + 1] + 1;
+            }
+        }
+        int res = len;
+        for(int i = 0; i < len; ++i){
+            res += max(left[i], right[i]);
+        }
+        return res;
+    }
+};
+```
+
+
 
 
 
@@ -716,3 +756,9 @@ class Solution {
 
 
 
+
+## Other
+
+
+
+[求不大于k的最大子数组和](https://www.quora.com/Given-an-array-of-integers-A-and-an-integer-k-find-a-subarray-that-contains-the-largest-sum-subject-to-a-constraint-that-the-sum-is-less-than-k)
