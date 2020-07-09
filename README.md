@@ -212,6 +212,18 @@ class Solution {
 
 
 
+### 子序列问题
+
+
+
+#### [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/)
+
+最长回文串的长度
+
+
+
+
+
 ## Bit Manipulation
 
 - ```-1 & n  --> n ```
@@ -311,6 +323,52 @@ public:
 
 
 
+### 指定和
+
+
+
+[39. Combination Sum](https://leetcode.com/problems/combination-sum/)
+
+> 给定一集合，求所有累加和为指定值的集合
+
+dfs过程中，使目标和逐渐趋于0
+
+```c++
+class Solution {
+public:
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+         sort(candidates.begin(), candidates.end());
+        return dfs(candidates, target, 0);
+    }
+    
+    vector<vector<int>> dfs(vector<int>& nums, int target, int idx){
+        vector<vector<int>> res;
+        for(int i = idx; i < nums.size(); ++i){
+            if(nums[i] < target){
+                auto subs = dfs(nums, target - nums[i], i);
+                for(auto sub: subs){
+                    sub.push_back(nums[i]);
+                    res.push_back(sub);
+                }
+            }else if(nums[i] == target){
+                res.push_back({nums[i]});
+                break;
+            }else{
+                break;
+            }
+        }
+        return res;
+    }
+};
+
+```
+
+
+
+
+
+
+
 
 
 ## Dynamic Programming
@@ -352,6 +410,8 @@ public:
     }
 };
 ```
+
+插入一个字符时，想办法删除前面比自己大并且后面再次出现的字符。
 
 
 
