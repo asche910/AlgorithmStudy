@@ -682,7 +682,7 @@ public:
 
 * n个不同的数进栈，出栈顺序种数有：` C(2n, n) / (n + 1)`
 
-
+ 
 
 ### 模拟操作
 
@@ -822,3 +822,25 @@ class Solution {
 
 
 [求不大于k的最大子数组和](https://www.quora.com/Given-an-array-of-integers-A-and-an-integer-k-find-a-subarray-that-contains-the-largest-sum-subject-to-a-constraint-that-the-sum-is-less-than-k)
+
+
+
+
+
+C++输入数组处理
+
+```c++
+int main() {
+    vector<int> nums(100);
+    int size = 0, tmp = 0;
+    while(cin >> tmp) {
+        nums[size++] = tmp;
+        if (getchar() == '\n') break;
+    }
+    cout << "size: " << size << endl;
+    nums.resize(size);
+    output(nums);
+    return 0;
+}
+```
+
