@@ -767,21 +767,22 @@ public:
 
 单调递减栈的应用，寻找下一个更大的数
 
-```java
+```c++
 class Solution {
-    public int[] dailyTemperatures(int[] T) {
-        Stack<Integer> stack = new Stack<>();
-        int[] res = new int[T.length];
-        for(int i = 0; i < T.length; i++){
-            while(!stack.isEmpty() && T[i] > T[stack.peek()]){
-                int idx = stack.pop();
-                res[idx] = i - idx;
+public:
+    vector<int> dailyTemperatures(vector<int>& T) {
+        stack<int> stk;
+        vector<int> res(T.size());
+        for(int i = 0; i < T.size(); ++i){
+            while(!stk.empty() && T[i] > T[stk.top()]){
+                res[stk.top()] = i - stk.top();
+                stk.pop();
             }
-            stack.push(i);
+            stk.push(i);
         }
         return res;
     }
-}
+};
 ```
 
 
@@ -798,33 +799,60 @@ class Solution {
 > 3 3 5 4 4 4
 > ```
 
-判断每个位置左右两边的**递增子序列**的长度，再加上1（自己）即为所求
+判断每个位置左右两边的**递增子序列**的长度，再加上1（自己）即为所求。
+
+使用单调递减栈，从左往右，从右往左。
 
 ```c++
 int main() {
-	int n, nums[100002];
-	cin >> n;
-	for (int i = 0; i < n; i++) {
-		cin >> nums[i];
-	}
-	vector<int> arr(n);
-	stack<int> s1, s2;
-	for (int i = n - 1; i >= 0; i--) {
-		arr[i] = s1.size();
-		while (!s1.empty() && nums[s1.top()] <= nums[i]) {
-			s1.pop();
-		}
-		s1.push(i);
-	}
+    vector<int> nums{ 5, 3, 8, 3, 2, 5 };
 
-	for (int i = 0; i < n; i++) {
-		arr[i] += s2.size() + 1;
-		while (!s2.empty() && nums[s2.top()] <= nums[i]) s2.pop();
-		s2.push(i);
-		cout << arr[i] << " ";
-	}
-	return 0;
+    vector<int> res(nums.size(), 1);
+    stack<int> leStk;
+    for (int i = 0; i < nums.size(); ++i) {
+        res[i] += leStk.size();
+        while (!leStk.empty() && nums[i] > nums[leStk.top()]) {
+            leStk.pop();
+        }
+        leStk.push(i);
+    }
+    stack<int> riStk;
+    for (int i = nums.size() - 1; i >= 0; --i) {
+        res[i] += riStk.size();
+        while (!riStk.empty() && nums[i] > nums[riStk.top()]) {
+            riStk.pop();
+        }
+        riStk.push(i);
+    }
+    output(res);
 }
+```
+
+
+
+#### [456. 132 Pattern](https://leetcode.com/problems/132-pattern/)
+
+> 给定数组中，判断是否存在132模式。i < j < k，nums[i] < nums[k] < nums[j] 。
+
+单调递增栈，栈顶存最大值，然后同时记录第二大的值third，当前值再和第二大的值比较。
+
+```c++
+class Solution {
+public:
+    bool find132pattern(vector<int>& nums) {
+        int third = INT_MIN;
+        stack<int> stk;
+        for(int i = nums.size() - 1; i >= 0; --i){
+            if(nums[i] < third) return true;
+            while(!stk.empty() && nums[i] > stk.top()){
+                third = stk.top();
+                stk.pop();
+            }
+            stk.push(nums[i]);
+        }
+        return false;
+    }
+};
 ```
 
 
