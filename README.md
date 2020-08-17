@@ -222,6 +222,44 @@ class Solution {
 
 
 
+
+
+### 区间问题
+
+#### [56. 合并区间](https://leetcode-cn.com/problems/merge-intervals/)
+
+> ```
+> 给出一个区间的集合，请合并所有重叠的区间。
+> 输入: intervals = [[1,3],[2,6],[8,10],[15,18]]
+> 输出: [[1,6],[8,10],[15,18]]
+> ```
+
+
+
+```c++
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        if(intervals.empty()) return intervals;
+        sort(intervals.begin(), intervals.end());
+        vector<vector<int>> res;
+        vector<int> temp = intervals[0];
+        for(auto& i: intervals){
+            if(i[0] <= temp[1]){
+                temp[1] = max(temp[1], i[1]);
+            }else{
+                res.push_back(temp);
+                temp = i;
+            }
+        }
+        res.push_back(temp);
+        return res;
+    }
+};
+```
+
+
+
 ### 旋转数组
 
 #### 排序的旋转数组求最小值
@@ -553,7 +591,7 @@ public:
 
 #### [560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)
 
-> 给定一个整数数组和一个整数 **k，**你需要找到该数组中和为 **k** 的连续的子数组的个数。
+> 给定一个整数数组和一个整数 **k**，你需要找到该数组中和为 **k** 的连续的子数组的个数。
 
 使用**前缀和**求解
 
@@ -665,7 +703,7 @@ public:
 
 > 给出两个矩形坐标，求重叠后所有的面积
 
-关键在于交点坐标，高的最小值，底的最大值
+关键在于交点坐标，高的最小值，低的最大值
 
 ```c++
     int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
