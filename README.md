@@ -895,6 +895,37 @@ public:
 
 
 
+#### [84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
+
+> 给定 *n* 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。
+>
+> 求在该柱状图中，能够勾勒出来的矩形的最大面积。
+
+单调**递增**栈
+
+```c++
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        heights.insert(heights.begin(), 0);
+        heights.push_back(0);
+        stack<int> stk;
+        int res = 0;
+        for(int i = 0; i < heights.size(); ++i){
+            while(stk.size() && heights[i] < heights[stk.top()]){
+                int top = stk.top();
+                stk.pop();
+                res = max(res, heights[top] * (i - stk.top() - 1));
+            }
+            stk.push(i);
+        }
+        return res;
+    }
+};
+```
+
+
+
 
 
 ## Tree
