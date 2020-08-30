@@ -177,7 +177,7 @@ class Solution {
 
 #### [322. Coin Change](https://leetcode-cn.com/problems/coin-change/)
 
-> 使用最少数量的硬币组成目标值，硬币可重复使用，返回需要的**硬币数量**
+> 使用最少数量的硬币组成目标值，硬币可重复使用，返回需要的**最少硬币数量**
 
 ```java
 class Solution {

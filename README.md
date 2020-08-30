@@ -88,32 +88,34 @@ class Solution {
 
 参考[这里](https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/)
 
-```java
-    public int lengthOfLIS(int[] nums) {
-        int len = nums.length;
-        if (len < 2) return len;
-        int[] tails = new int[len];
-        tails[0] = nums[0];
-        int size = 1;
-        for (int i = 1; i < len; i++) {
-            if (nums[i] > tails[size - 1]) {
-                tails[size++] = nums[i];
-            } else {
-                int low = 0, high = size - 1;
-                while (low < high) {
-                    int mid = (low + high) / 2;
+
+
+```c++
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        if(nums.size() < 2) return nums.size();
+        vector<int> tails;
+        for(int n: nums){
+            if(tails.empty() || n > tails.back()){
+                tails.push_back(n);
+            }else{
+                int low = 0, high = tails.size() - 1;
+                while(low < high){
+                    int mid = low + (high - low) / 2;
                     // 注意先后条件，新值插入位置为：第一个大于等于新值的数所在位置
-                    if (nums[i] > tails[mid]) {
+                    if(n > tails[mid]){
                         low = mid + 1;
-                    } else {
+                    }else{
                         high = mid;
                     }
                 }
-                tails[low] = nums[i];
+                tails[low] = n;
             }
         }
-        return size;
+        return tails.size();
     }
+};
 ```
 
 
@@ -262,16 +264,110 @@ public:
 
 ### 旋转数组
 
+#### 排序的旋转数组求目标值
+
+##### [33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
+
+> 旋转排序数组（无相同值）中，搜寻目标值。
+
+旋转数组中先找到递增的那部分，复杂情况用else来应对。
+
+
+
+```c++
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int low = 0, high = nums.size() - 1;
+        while(low <= high){
+            int mid = low + (high - low) / 2;
+            if(nums[mid] == target) return mid;
+            if(nums[mid] >= nums[low]){
+                if(nums[low] <= target && target < nums[mid]){
+                    high = mid - 1;
+                }else{
+                    low = mid + 1;
+                }
+            }else{
+                if(nums[mid] < target && target <= nums[high]){
+                    low = mid + 1;
+                }else{
+                    high = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+};
+```
+
+
+
+##### [81. 搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/)
+
+> 旋转排序数组（含有相同值）中，搜寻目标值。
+
+与上一题不同的是，多了一种特殊情况需要处理，即[3，2，3，3，3]这种。nums[low] <= nums[mid] 中包括了递增和上述特殊情况。
+
+```c++
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+        int low = 0, high = nums.size() - 1;
+        while(low <= high){
+            int mid = low + (high - low) / 2;
+            if(nums[mid] == target) return true;
+
+            if(nums[low] == nums[mid] && nums[mid] == nums[high]){
+                low++;
+                high--;
+            }else if(nums[low] <= nums[mid]){
+                if(nums[low] <= target && target < nums[mid]) high = mid - 1;
+                else low = mid + 1;
+            }else if(nums[mid] <= nums[high]){
+                if(nums[mid] < target && target <= nums[high]) low = mid + 1;
+                else high = mid - 1;
+            }
+        }
+        return false;
+    }
+};
+```
+
+
+
+
+
+
+
 #### 排序的旋转数组求最小值
 
 ##### [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
+
+```c++
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int low = 0, high = nums.size() - 1;
+        while(low < high){
+            int mid = low + (high - low) / 2;
+            if(nums[mid] > nums[high]){
+                low = mid + 1;
+            }else{
+                high = mid;
+            }
+        }
+        return nums[low];
+    }
+};
+```
 
 
 
 ##### [154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
 > 其中数组包含重复元素
 
-
+判断两种确切的特殊情况
 
 ```c++
 class Solution {
@@ -670,7 +766,13 @@ public:
 
 * 判断n是否是素数，判断`[2,sqrt(n)]`内的数是否能整除n
 
-
+* 1 = 1
+  4 = 1 + 3
+  9 = 1 + 3 + 5
+  16 = 1 + 3 + 5 + 7
+  25 = 1 + 3 + 5 + 7 + 9
+  36 = 1 + 3 + 5 + 7 + 9 + 11
+* 
 
 #### [738. Monotone Increasing Digits](https://leetcode.com/problems/monotone-increasing-digits/)
 
@@ -872,18 +974,18 @@ int main() {
 
 > 给定数组中，判断是否存在132模式。i < j < k，nums[i] < nums[k] < nums[j] 。
 
-单调递增栈，栈顶存最大值，然后同时记录第二大的值third，当前值再和第二大的值比较。
+单调**递减栈**，栈顶存最小值，底部保存最大值，然后同时记录第二大的值sec，当前值再和第二大的值比较。
 
 ```c++
 class Solution {
 public:
     bool find132pattern(vector<int>& nums) {
-        int third = INT_MIN;
         stack<int> stk;
+        int sec = INT_MIN;
         for(int i = nums.size() - 1; i >= 0; --i){
-            if(nums[i] < third) return true;
+            if(nums[i] < sec) return true;
             while(!stk.empty() && nums[i] > stk.top()){
-                third = stk.top();
+                sec = stk.top();
                 stk.pop();
             }
             stk.push(nums[i]);
@@ -955,6 +1057,54 @@ class Solution {
     }
 }
 ```
+
+
+
+
+
+## Union-Find
+
+
+
+并查集，顾名思义，一个实现了合并和查询集合方法的数据结构。最常见的方式是用数组来实现。
+
+例如，节点 ① ② ③ ④，已知 ① 与 ② 相连， ② 与 ④ 相连，经过并查集操作，应该形成两个集合，其中一个集合是 {① ② ④}，另一个是 {③}。
+
+
+
+
+
+#### [684. 冗余连接](https://leetcode-cn.com/problems/redundant-connection/)
+
+> 输入一个图，该图由一个有着N个节点 (节点值不重复1, 2, ..., N) 的树及一条附加的边构成。附加的边的两个顶点包含在1到N中间，这条附加的边不属于树中已存在的边。返回一条可以删去的边，使得结果图是一个有着N个节点的树。
+>
+
+无向图中，删除最早的边，该边原本就能够连通。
+
+```c++
+class Solution {
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        vector<int> arr(edges.size() + 1);
+        for(int i = 1; i < arr.size(); ++i) arr[i] = i;
+        for(auto& i: edges){
+            if(arr[i[0]] == arr[i[1]]) return i;
+            // 需要引入temp变量，因为arr数组可能会改变
+            int temp = arr[i[0]];
+            for(int j = 0; j < arr.size(); ++j){
+                if(arr[j] == temp){
+                    arr[j] = arr[i[1]];
+                }
+            }
+        }
+        return {};
+    }
+};
+```
+
+
+
+
 
 
 
