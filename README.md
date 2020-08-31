@@ -236,7 +236,7 @@ class Solution {
 > 输出: [[1,6],[8,10],[15,18]]
 > ```
 
-
+头部排序
 
 ```c++
 class Solution {
@@ -259,6 +259,69 @@ public:
     }
 };
 ```
+
+
+
+#### [452. 用最少数量的箭引爆气球](https://leetcode-cn.com/problems/minimum-number-of-arrows-to-burst-balloons/)
+
+尾部排序
+
+```c++
+class Solution {
+public:
+    int findMinArrowShots(vector<vector<int>>& points) {
+        if(points.empty()) return 0;
+        sort(points.begin(), points.end(), [](auto& a, auto& b){
+            return a[1] < b[1] || a[1] == b[1] && a[0] < b[0];
+        });
+        int cnt = 1;
+        vector<int> temp = points[0];
+        for(auto &i: points){
+            if(i[0] > temp[1]){
+                cnt++;
+                temp = i;
+            }
+        }
+        return cnt;
+    }
+};
+```
+
+
+
+
+
+
+
+#### [646. 最长数对链](https://leetcode-cn.com/problems/maximum-length-of-pair-chain/)
+
+> 给定一系列区间集合，找到最大的数对链长度。区间[a, b]，[c, d]，c > d则符合。
+
+尾部优先排序
+
+```c++
+class Solution {
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end(), [](auto& a, auto& b){
+            return a[1] < b[1] || a[1] == b[1] && a[0] < b[0];
+        });
+        int cnt = 0;
+        vector<int> tail(pairs[0]);
+        for(int i = 0; i < pairs.size(); ++i){
+            if(i == 0 || pairs[i][0] > tail[1]){
+                tail = pairs[i];
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
+```
+
+
+
+
 
 
 
