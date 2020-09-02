@@ -2,6 +2,45 @@
 
 
 
+#### [312. 戳气球](https://leetcode-cn.com/problems/burst-balloons/)
+
+> 给定一数组，依次选择一个数nums[i]，求所有nums[i - 1] * nums[i] * nums[i + 1]的累加最大值。
+>
+> ```
+> 输入: [3,1,5,8]
+> 输出: 167 
+> 解释: nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
+>      coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167
+> ```
+
+`dp[i][j]`表示区间[i, j]中的最大值
+
+```c++
+class Solution {
+public:
+    int maxCoins(vector<int>& nums) {
+        int n = nums.size();
+        nums.insert(nums.begin(), 1);
+        nums.push_back(1);
+        vector<vector<int>> dp(n + 2, vector<int>(n + 2));
+        for(int len = 1; len <= n; ++len){
+            for(int i = 1; i <= n - len + 1; ++i){
+                int j = i + len - 1;
+                for(int k = i; k <= j; ++k){
+                    dp[i][j] = max(dp[i][j], dp[i][k - 1] + dp[k + 1][j] + 
+                                  nums[k] * nums[i - 1] * nums[j + 1]);
+                }
+            }
+        }
+        return dp[1][n];
+    }
+};
+```
+
+
+
+
+
 ## 区间问题
 
 #### [516. Longest Palindromic Subsequence](https://leetcode-cn.com/problems/longest-palindromic-subsequence/)
