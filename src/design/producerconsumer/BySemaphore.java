@@ -6,7 +6,9 @@ public class BySemaphore {
     volatile static int size;
     static int capacity = 10;
 
+    //mutex互斥量用于防止对size变量并发修改
     static Semaphore mutex = new Semaphore(1);
+    // 刚开始为空，notFull状态有10个，表示生产者可以acquire 10次该状态
     static Semaphore notFull = new Semaphore(capacity);
     static Semaphore notEmpty = new Semaphore(0);
 

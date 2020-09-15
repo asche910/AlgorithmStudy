@@ -430,7 +430,9 @@ public:
 ##### [154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
 > 其中数组包含重复元素
 
-判断两种确切的特殊情况
+对于`[2,2,1]`用例，常规判断无效。
+
+必须判断两种确切的特殊情况。
 
 ```c++
 class Solution {
@@ -497,30 +499,28 @@ public:
 
 > 求优美排列的个数。1-N中，每个位置能够被上面的值整除或整除上面的值
 
-```java
+```c++
 class Solution {
-    int cnt;
-
-    public int countArrangement(int N) {
-        permute(new boolean[N + 1], 1, N);
-        return cnt;
+public:
+    int countArrangement(int N) {
+        vector<bool> flags(N + 1);
+        return dfs(flags, 1);
     }
 
-    public void permute(boolean[] visited, int cur, int N){
-        if(cur > N){
-            cnt++;
-            return;
-        }
-        for(int i = 1; i <= N; i++){
-            if(!visited[i] && (i % cur == 0 || cur % i == 0)){
-                visited[i] = true;
-                // 注意是cur不是i
-                permute(visited, cur + 1, N);
-                visited[i] = false;
+    int dfs(vector<bool> &flags, int cur){
+        if(cur == flags.size()) return 1;
+        int res = 0;
+        for(int i = 1; i < flags.size(); ++i){
+            if(!flags[i] && (i % cur == 0 || cur % i == 0)){
+                flags[i] = true;
+                // 此处为cur + 1
+                res += dfs(flags, cur + 1);
+                flags[i] = false;
             }
         }
+        return res;
     }
-}
+};
 ```
 
 ### 全排列
@@ -1093,6 +1093,46 @@ public:
 
 
 
+### 括号问题
+
+
+
+#### [1249. 移除无效的括号](https://leetcode-cn.com/problems/minimum-remove-to-make-valid-parentheses/)
+
+> 给定一字符串（包含括号和字符），移除多余的括号，使括号有效，并且保留原来的字符。
+
+
+
+```c++
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        vector<bool> rem(s.size(), false);
+        stack<int> stk;
+        for(int i = 0; i < s.size(); ++i){
+            if(s[i] == '('){
+                rem[i] = true;
+                stk.push(i);
+            }else if(s[i] == ')'){
+                if(!stk.empty()){
+                    rem[stk.top()] = false;
+                    stk.pop(); 
+                }else{
+                    rem[i] = true;
+                }
+            }
+        }
+        string res;
+        for(int i = 0; i < s.size(); ++i){
+            if(!rem[i]) res += s[i];
+        }
+        return res;
+    }
+};
+```
+
+
+
 ## Tree
 
 
@@ -1198,5 +1238,18 @@ int main() {
     output(nums);
     return 0;
 }
+```
+
+
+
+```c++
+    string str;
+	// 处理多行字符串（可能为空字符）
+    while (getline(cin, str)) {...}
+```
+
+```java
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()){ }
 ```
 

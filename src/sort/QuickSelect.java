@@ -4,7 +4,6 @@ import tool.Tools;
 
 import java.util.Random;
 
-
 /**
  * 快速选择算法
  * 寻找数组中第K大的数字，其中 1 <= K <= len
