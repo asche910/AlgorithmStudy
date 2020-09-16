@@ -622,6 +622,54 @@ public:
 
 
 
+## Graph
+
+使用邻接表数组
+
+
+
+#### [207. 课程表](https://leetcode-cn.com/problems/course-schedule/)
+
+> [i, j]表示课程i依赖于课程j，判断该课程表数组能否学习完成
+
+实质为判断图中是否存在环。
+
+未访问用0，访问中用1，以访问用2。
+
+```c++
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> graph(numCourses);
+        for(auto& i: prerequisites){
+            graph[i[1]].push_back(i[0]);
+        }
+        vector<int> visited(numCourses);
+        for(int i = 0; i < numCourses; ++i){
+            if(!dfs(graph, visited, i)) return false;
+        }
+        return true;
+    }
+
+    bool dfs(vector<vector<int>>& graph, vector<int>& visited, int cur){
+        visited[cur] = 1;
+        for(int i: graph[cur]){
+            if(visited[i] == 0){
+                if(!dfs(graph, visited, i)) return false;
+            }else if(visited[i] == 1){
+                return false;
+            }
+        }
+        visited[cur] = 2;
+        return true;
+    }
+};
+```
+
+
+
+
+
 ## Greedy
 
 
