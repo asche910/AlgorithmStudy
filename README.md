@@ -1265,6 +1265,18 @@ public:
 
 
 
+
+
+pair、vector可以作为map的key，但不能作为unordered_map的key
+
+```c++
+map<pair<int, int>, int> mp;
+mp[make_pair(1, 2)] = 11;
+```
+
+
+
+
 [求不大于k的最大子数组和](https://www.quora.com/Given-an-array-of-integers-A-and-an-integer-k-find-a-subarray-that-contains-the-largest-sum-subject-to-a-constraint-that-the-sum-is-less-than-k)
 
 

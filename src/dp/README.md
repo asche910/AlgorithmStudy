@@ -284,6 +284,52 @@ public:
 
 
 
+## 股票问题
+
+
+
+
+
+#### [188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)
+
+> 给定一个数组，它的第 *i* 个元素是一支给定的股票在第 *i* 天的价格。
+>
+> 设计一个算法来计算你所能获取的最大利润。你最多可以完成 **k** 笔交易。
+
+`dp[i][j][0]`表示第i天，第j笔交易，手上**没有**股票的最大利润；
+
+```c++
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        if(prices.empty()) return 0;
+        if(k >= prices.size() / 2){
+            int sum = 0;
+            for(int i = 1; i < prices.size(); ++i){
+                if(prices[i] > prices[i - 1]){
+                    sum += prices[i] - prices[i - 1];
+                }
+            }
+            return sum;
+        }
+        vector<vector<vector<int>>> dp(prices.size(), vector<vector<int>>(k + 1, vector<int>(2, 0)));
+        for(int i = 0; i < prices.size(); ++i){
+            for(int j = k; j >= 1; --j){
+                if(!i){
+                    dp[i][j][0] = 0;
+                    dp[i][j][1] = -prices[i];
+                    continue;
+                }
+                dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);
+                dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i]);
+            }
+        }
+        return dp[prices.size() - 1][k][0];
+    }
+};
+
+```
+
 
 
 ## 状态压缩
@@ -322,3 +368,8 @@ class Solution {
 More：
 
 464,935,1349
+
+
+
+
+
