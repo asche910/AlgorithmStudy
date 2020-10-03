@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.Semaphore;
+package design.outputbyorder;
+
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Main {
+public class ByReentrantLock {
     public static Lock lock = new ReentrantLock();
     public static Condition conditionA = lock.newCondition();
     public static Condition conditionB = lock.newCondition();
@@ -14,17 +12,21 @@ public class Main {
     public static int state = 0;
 
     public static void main(String[] args) {
-        var a = new int[10];
-        System.out.println(Arrays.toString(a));
+        ThreadA threadA = new ThreadA();
+        ThreadB threadB = new ThreadB();
+        ThreadC threadC = new ThreadC();
+        threadA.start();
+        threadB.start();
+        threadC.start();
     }
 
     static class ThreadA extends Thread {
         @Override
         public void run() {
-            lock.lock();
             try {
+                lock.lock();
                 for (int i = 0; i < 10; i++) {
-                    while (state % 3 != 0){
+                    while (state % 3 != 0) {
                         conditionA.await();
                     }
                     System.out.println(Thread.currentThread().getName() + " A");
@@ -33,7 +35,7 @@ public class Main {
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 lock.unlock();
             }
         }
@@ -42,10 +44,10 @@ public class Main {
     static class ThreadB extends Thread {
         @Override
         public void run() {
-            lock.lock();
             try {
+                lock.lock();
                 for (int i = 0; i < 10; i++) {
-                    while (state % 3 != 1){
+                    while (state % 3 != 1) {
                         conditionB.await();
                     }
                     System.out.println(Thread.currentThread().getName() + " B");
@@ -54,7 +56,7 @@ public class Main {
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 lock.unlock();
             }
         }
@@ -63,10 +65,10 @@ public class Main {
     static class ThreadC extends Thread {
         @Override
         public void run() {
-            lock.lock();
             try {
+            lock.lock();
                 for (int i = 0; i < 10; i++) {
-                    while (state % 3 != 2){
+                    while (state % 3 != 2) {
                         conditionC.await();
                     }
                     System.out.println(Thread.currentThread().getName() + " C");
@@ -75,7 +77,7 @@ public class Main {
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }finally {
+            } finally {
                 lock.unlock();
             }
         }

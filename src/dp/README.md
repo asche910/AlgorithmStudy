@@ -13,28 +13,29 @@
 >      coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167
 > ```
 
-`dp[i][j]`表示区间[i, j]中的最大值
+`dp[i][j]`表示区间(i,  j)中的最大值，不戳破边界i和j
 
 ```c++
 class Solution {
 public:
     int maxCoins(vector<int>& nums) {
         int n = nums.size();
+        vector<vector<int>> dp(n + 2, vector<int>(n + 2, 0));
         nums.insert(nums.begin(), 1);
         nums.push_back(1);
-        vector<vector<int>> dp(n + 2, vector<int>(n + 2));
-        for(int len = 1; len <= n; ++len){
-            for(int i = 1; i <= n - len + 1; ++i){
-                int j = i + len - 1;
-                for(int k = i; k <= j; ++k){
-                    dp[i][j] = max(dp[i][j], dp[i][k - 1] + dp[k + 1][j] + 
-                                  nums[k] * nums[i - 1] * nums[j + 1]);
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = i + 2; j <= n + 1; j++) {
+                for (int k = i + 1; k < j; k++) {
+                    dp[i][j] = max(
+                            dp[i][j],
+                            (dp[i][k] + dp[k][j] + nums[i] * nums[k] * nums[j]));
                 }
             }
         }
-        return dp[1][n];
+        return dp[0][n + 1];
     }
 };
+
 ```
 
 
@@ -329,6 +330,37 @@ public:
 };
 
 ```
+
+巧解
+
+```c++
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        if (!prices.size()) return 0;
+        if (k >= prices.size() / 2) {
+            int maxsumval = 0;
+            for (int i = 1; i < prices.size(); i++)
+                if (prices[i] > prices[i - 1])
+                    maxsumval += prices[i] - prices[i - 1];
+            return maxsumval;
+        }
+        vector<int> sell(k + 1, 0), buy(k + 1, prices[0]);
+        for (int i = 1; i < prices.size(); i++) {
+            for (int t = 1; t <= k; t++) {
+                buy[t] = min(buy[t], prices[i] - sell[t - 1]);
+                sell[t] = max(sell[t], prices[i] - buy[t]);
+            }
+        }
+        return sell[k];
+    }
+};
+
+```
+
+
+
+
 
 
 

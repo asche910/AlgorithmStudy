@@ -465,6 +465,80 @@ public:
 
 
 
+## Binary Indexed Tree
+
+也称为**树状数组**
+
+它可以以 *O*(log *n*) 的时间得到任意前缀和
+
+并同时支持在 *O*(log *n*) 时间内支持动态单点值的修改
+
+
+
+https://www.cnblogs.com/xenny/p/9739600.html
+
+
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+
+// Binary Indexed Tree
+class BITree {
+private:
+    // index start from 1
+    vector<int> c = { 0 };
+    int n;
+public:
+    BITree(int size) {
+        n = size;
+        c.resize(size + 1);
+    }
+
+    int lowbit(int x) {
+        return x & (-x);
+    }
+
+    // change k
+    void update(int i, int k) {
+        while (i <= n) {
+            c[i] += k;
+            i += lowbit(i);
+        }
+    }
+
+    int getSum(int i) {
+        int res = 0;
+        while (i > 0) {
+            res += c[i];
+            i -= lowbit(i);
+        }
+        return res;
+    }
+};
+
+int main() {
+    vector<int> nums = { 3, 5, 8, 1, 2, 7 };
+    BITree tree = BITree(nums.size() + 1);
+    for (int i = 0; i < nums.size(); ++i) {
+        tree.update(i + 1, nums[i]);
+    }
+    // get sum from nums[0] to nums[2]
+    cout << tree.getSum(3) << endl; // 16
+    // change nums[2] to 8 - 6 = 2
+    tree.update(3, -6);
+    cout << tree.getSum(3) << endl; // 10
+    return 0;
+}
+
+```
+
+
+
+
+
+
+
 ## Bit Manipulation
 
 - ```-1 & n  --> n ```
@@ -473,7 +547,7 @@ public:
 - `n & (n - 1)`将最右边一个1变为0
 - `n & -n`求得最右边一个1的部分
 
-```
+```c++
 	6 & -6 = 2
 	   0 0110
 	 & 1 1010
@@ -1181,6 +1255,50 @@ public:
 
 
 
+## String
+
+
+
+### KMP
+
+#### [459. 重复的子字符串](https://leetcode-cn.com/problems/repeated-substring-pattern/)
+
+> 判断字符串是否是由重复子串构成
+
+```c++
+class Solution {
+public:
+    bool repeatedSubstringPattern(string s) {
+        if (s.empty()) return false;
+        vector<int> next = getNext(s);
+        int len = s.size();
+        return next[len - 1] != -1 && len % (len - (next[len - 1] + 1)) == 0;
+    }
+
+    vector<int> getNext(string& s) {
+        vector<int> next(s.size());
+        next[0] = -1;
+        int j = -1;
+        for (int i = 1; i < s.size(); i++) {
+            while (j >= 0 && s[i] != s[j + 1]) {
+                j = next[j];
+            }
+            if (s[i] == s[j + 1]) {
+                j++;
+            }
+            next[i] = j;
+        }
+        return next;
+    }
+};
+```
+
+https://leetcode-cn.com/problems/repeated-substring-pattern/solution/459-zhong-fu-de-zi-zi-fu-chuan-kmpjing-dian-wen-ti/
+
+
+
+
+
 ## Tree
 
 
@@ -1256,6 +1374,40 @@ public:
 
 
 
+
+## ZZZ
+
+### 装载货物
+
+> a, b, k, v。   a个物品，b个隔板，每个箱子最多有k个隔间，每个隔间最多可装v个物品。其中箱子不放隔板也等于有一个隔间，放b - 1个隔板可有b个隔间。所有参数都大于等于1。求装完所有物品所需最少箱子数量。
+
+不要尝试一口吃成胖子，对于复杂点的情况，可以简化成一次次的**模拟操作**。
+
+```java
+public static void main(String[] args) {
+        Scanner cin = new Scanner(System.in);
+        while (cin.hasNextInt()) {
+            int a = cin.nextInt();
+            int b = cin.nextInt();
+            int k = cin.nextInt();
+            int v = cin.nextInt();
+            int res=0;
+            while(a>0){
+                if(b>=k-1){
+                    b=b-(k-1);
+                    a-=k*v;
+                }else if(b<(k-1) && b!=0){
+                    a-=v*(b+1);
+                    b=0;
+                }else{
+                    a-=v;
+                }
+                res++;
+            }
+            System.out.println(res);
+        }
+    }
+```
 
 
 
