@@ -14,8 +14,8 @@ public class Main {
     public static int state = 0;
 
     public static void main(String[] args) {
-        var a = new int[10];
-        System.out.println(Arrays.toString(a));
+
+
     }
 
     static class ThreadA extends Thread {

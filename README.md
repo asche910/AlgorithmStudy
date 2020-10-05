@@ -1010,6 +1010,93 @@ public:
 
 
 
+**线段树**是一种二叉树形数据结构，用以存储区间或线段，并且允许快速查询结构内包含某一点的所有区间。
+
+
+
+```c++
+class SegmentTreeNode {
+public:
+    int start, end;
+    int count; // 权值，这里示例为区间范围内的数字的个数
+
+    SegmentTreeNode* left, * right;
+
+    SegmentTreeNode(int s, int e) : start(s), end(e) {
+        count = 0;
+    }
+};
+
+SegmentTreeNode* build(int start, int end) {
+    if (start > end)
+        return NULL;
+    SegmentTreeNode* root = new SegmentTreeNode(start, end);
+
+    if (start == end) {
+        root->count = 0;
+    } else {
+        int mid = start + (end - start) / 2;
+        root->left = build(start, mid);
+        root->right = build(mid + 1, end);
+    }
+    return root;
+}
+
+int getCount(SegmentTreeNode* root, int start, int end) {
+    if (root == NULL || start > end)
+        return 0;
+    if (start == root->start && end == root->end) {
+        return root->count;
+    }
+    int mid = root->start + (root->end - root->start) / 2;
+    int leftcount = 0, rightcount = 0;
+
+    if (start <= mid) {
+        if (mid < end)
+            leftcount = getCount(root->left, start, mid);
+        else
+            leftcount = getCount(root->left, start, end);
+    }
+
+    if (mid < end) {
+        if (start <= mid)
+            rightcount = getCount(root->right, mid + 1, end);
+        else
+            rightcount = getCount(root->right, start, end);
+    }
+    return (leftcount + rightcount);
+}
+
+void insert(SegmentTreeNode* root, int index, int val) {
+    if (root->start == index && root->end == index) {
+        root->count += val;
+        return;
+    }
+
+    int mid = root->start + (root->end - root->start) / 2;
+    if (index >= root->start && index <= mid) {
+        insert(root->left, index, val);
+    }
+    if (index > mid && index <= root->end) {
+        insert(root->right, index, val);
+    }
+
+    root->count = root->left->count + root->right->count;
+}
+
+int main() {
+    SegmentTreeNode* tree = build(0, 5);
+    insert(tree, 4, 1);
+    insert(tree, 3, 1);
+    cout << getCount(tree, 0, 3) << endl;
+    return 0;
+}
+```
+
+
+
+
+
 #### [307. 区域和检索 - 数组可修改](https://leetcode-cn.com/problems/range-sum-query-mutable/)
 
 ```c++
