@@ -1498,6 +1498,33 @@ public static void main(String[] args) {
 
 
 
+### 最小的交换次数
+
+> 给定仅包含‘B’或‘G’的字符数组，可以相邻交换，求最小交换次数，使得‘B’和‘G’分别在两端（即彼此分开）。如“BBGGG”或“GGGBB”。
+
+分别考虑将‘B’和‘G’移到前面的次数，取最小。由于只有两种对象，移完一种，另外一种也ok了。
+
+```c++
+    int lineup(string peoples) {
+        int ge1 = 0, ge2 = 0, n = peoples.length();
+        int res1 = 0, res2 = 0;
+        for (int i = 0; i < n; ++i) {
+            if (peoples[i] == 'G') {
+                res1 += i - ge1;
+                ++ge1;
+            } else {
+                res2 += i - ge2;
+                ++ge2;
+            }
+        }
+        return min(res1, res2);
+    }
+```
+
+
+
+
+
 
 
 ## Other
