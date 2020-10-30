@@ -66,22 +66,22 @@ class Solution {
 
 ```java
 class Solution {
-    public int lengthOfLIS(int[] nums) {
-        int len = nums.length;
-        if(len < 2) return len;
-        int[] dp = new int[len];
-        Arrays.fill(dp, 1);
-        
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> dp(n, 1);
         int res = 0;
-        for(int i = 1; i < len; i++){
-            for(int j = 0; j < i; j++){
-                if(nums[j] < nums[i]) dp[i] = Math.max(dp[i], dp[j] + 1);
-            }
-            res = Math.max(res, dp[i]);
+        for(int i = 0; i < n; ++i){
+            for(int j = 0; j < i; ++j){
+                if(nums[j] < nums[i]){
+                    dp[i] = max(dp[i], dp[j] + 1);
+                }
+            } 
+            res = max(res, dp[i]);
         }
         return res;
     }
-}
+};
 ```
 
 巧解：使用tails数组，tails[i]表示长度为`i + 1`的所有最长上升子序列的结尾最小值（因此tails数组并不一定是最长子序列的值）。tails数组大小即为所求。O(n log n)
@@ -94,23 +94,23 @@ class Solution {
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        if(nums.size() < 2) return nums.size();
-        vector<int> tails;
-        for(int n: nums){
-            if(tails.empty() || n > tails.back()){
-                tails.push_back(n);
+        if(nums.empty()) return 0;
+        vector<int> tails{nums[0]};
+        for(int i = 1; i < nums.size(); ++i){
+            if(nums[i] > tails.back()){
+                tails.push_back(nums[i]);
             }else{
                 int low = 0, high = tails.size() - 1;
                 while(low < high){
                     int mid = low + (high - low) / 2;
                     // 注意先后条件，新值插入位置为：第一个大于等于新值的数所在位置
-                    if(n > tails[mid]){
+                    if(tails[mid] < nums[i]){
                         low = mid + 1;
                     }else{
                         high = mid;
                     }
                 }
-                tails[low] = n;
+                tails[low] = nums[i];
             }
         }
         return tails.size();
@@ -559,6 +559,44 @@ int main() {
 
 
 
+### 任意进制转换
+
+先转换成十进制，然后转换成目标进制
+
+```c++
+// s 原数字，d1为s表示的进制，d2为转换的目标进制
+string convert(string s, int d1, int d2) {
+    long long num = 0;
+    int temp;
+    for (int i = 0; i < s.size(); ++i) {
+        if (isdigit(s[i])) {
+            temp = s[i] - '0';
+        } else {
+            temp = s[i] - 'A' + 10;
+        }
+        num = num * d1 + temp;
+    }
+    string res;
+    while (num) {
+        temp = num % d2;
+        if (temp <= 9) {
+            res += (temp + '0');
+        } else {
+            res += (temp + 'A' - 10);
+        }
+        num /= d2;
+    }
+    reverse(res.begin(), res.end());
+    return res;
+}
+// cout << convert("3A", 16, 10) << endl;  --> 58
+
+```
+
+
+
+
+
 
 
 
@@ -819,7 +857,7 @@ public:
 
 ### 相邻元素的约束
 
-相邻元素拥有制约关系，则可采取先左右扫描，再贪心结合
+相邻元素拥有制约关系，则可采取先**左右扫描**，再贪心结合
 
 #### [135. Candy](https://leetcode.com/problems/candy/)
 
@@ -938,6 +976,40 @@ public:
 ```
 
 
+
+### TOP K问题
+
+#### [373. 查找和最小的K对数字](https://leetcode-cn.com/problems/find-k-pairs-with-smallest-sums/)
+
+> 从两个数组中各取一个数组成一对，找出和最小的k对数字
+
+```c++
+class Solution {
+public:
+    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        priority_queue<vector<int>, vector<vector<int>>, cmp> pq;
+        for(int a: nums1){
+            for(int b: nums2){
+                vector<int> temp {a, b};
+                pq.push(temp);
+            }
+        }
+        vector<vector<int>> res;
+        while(!pq.empty() && k){
+            res.push_back(pq.top());
+            pq.pop();
+            k--;
+        }
+        return res;
+    }
+
+    struct cmp{
+        bool operator()(vector<int> &a, vector<int> &b){
+            return a[0] + a[1] > b[0] + b[1];
+        }
+    };
+};
+```
 
 
 
@@ -1528,6 +1600,10 @@ public static void main(String[] args) {
 
 
 ## Other
+
+
+
+二叉树遍历，输入为数组非TreeNode时，可以使用`2 * i + 1`和`2 * i + 2`来遍历子节点。
 
 
 

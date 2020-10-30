@@ -72,6 +72,34 @@ class Solution {
 
 
 
+#### [1024. 视频拼接](https://leetcode-cn.com/problems/video-stitching/)
+
+
+
+> 给定区间数组，求能够拼接成目标区间[0, T]的最小区间个数。
+
+
+
+```c++
+class Solution {
+public:
+    int videoStitching(vector<vector<int>>& clips, int T) {
+        vector<int> dp(T + 1, 1e9);
+        dp[0] = 0;
+        for(int i = 1; i <= T; ++i){
+            for(auto &it: clips){
+                if(i >= it[0] && i <= it[1]){
+                    dp[i] = min(dp[i], dp[it[0]] + 1);
+                }
+            }
+        }
+        return dp[T] == 1e9 ? -1 : dp[T];
+    }
+};
+```
+
+
+
 
 
 ## 编辑距离
@@ -279,6 +307,33 @@ public:
             }
         }
         return dp[amount];
+    }
+};
+
+```
+
+
+
+#### [377. 组合总和 Ⅳ](https://leetcode-cn.com/problems/combination-sum-iv/)
+
+> 给定不重复的正整数数组，找出和为目标正整数target的组合个数。
+>
+> 例如[1,  2]和[2, 1]算2个。
+
+```c++
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        vector<unsigned long long> dp(target + 1); // 防止溢出
+        dp[0] = 1;
+        for(int i = 1; i <= target; ++i){
+            for(int num: nums){
+                if(i - num >= 0){
+                    dp[i] += dp[i - num];
+                }
+            }
+        }
+        return dp[target];
     }
 };
 ```
