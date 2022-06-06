@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 /**
  * 大根堆，首数字序号从0开始
+ *
+ * https://segmentfault.com/a/1190000017301113
  */
 public class HeapSort {
     public static void main(String[] args) {
