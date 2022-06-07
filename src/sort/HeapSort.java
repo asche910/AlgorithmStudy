@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 /**
  * 大根堆，首数字序号从0开始
+ *
+ * https://segmentfault.com/a/1190000017301113
  */
 public class HeapSort {
     public static void main(String[] args) {
@@ -18,6 +20,7 @@ public class HeapSort {
     public static void heapSort(int[] nums){
         int len = nums.length;
         // 构造堆，对非叶子节点heapify（不能从低到高遍历）
+        // 从第一个非叶子节点开始
         for(int i = len / 2  - 1; i >= 0; i--){
             heapify(nums, i, len - 1);
         }
