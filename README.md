@@ -19,7 +19,7 @@ class Solution {
     public int[] maxSumOfThreeSubarrays(int[] nums, int k) {
         int len = nums.length, maxSum = 0;
         int[] sum = new int[len + 1], posLeft = new int[len], posRight = new int[len], res = new int[3];
-        for(int i = 0; i < nums.length; i++) sum[i + 1] = sum[i] + nums[i];
+        for(int i = 0; i < nums.length; i++) sum[i + 1] = sum[i] + nums[i]; 
         
         for(int i = k, cur = sum[k] - sum[0]; i < len - 2 * k; i++){
             if(sum[i + 1] - sum[i + 1 - k] > cur){

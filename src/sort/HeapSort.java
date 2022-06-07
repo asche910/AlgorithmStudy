@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class HeapSort {
     public static void main(String[] args) {
-        int[] nums = new int[]{3, 2, 4, 1, 5, 0};
+        int[] nums = new int[]{34, 2, 43, 12, 50, 0, 32, 13, 56, 22, 53, 3, 1, 9, 23, 50, -5, 20};
         System.out.println(Arrays.toString(nums));
         heapSort(nums);
         System.out.println(Arrays.toString(nums));
