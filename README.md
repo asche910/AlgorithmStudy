@@ -1517,6 +1517,54 @@ class Solution {
 
 
 
+
+
+## Two Pointer
+
+双指针，条件判断中，指针移动是**减弱当前条件**的一方移动
+
+
+
+### 二数和变种（>=）
+
+> 给定无序正整数数组，求大于等于target的二数和有多少对，并且不能重复。
+>
+> {1, 4, 5, 2, 2, 7, 8, 7}, target = 12
+>
+> 有(4, 8), (5, 8), (7, 8), (5, 7), (7, 7)共五队，所以返回5
+
+
+
+```c++
+int findPairCnt(vector<int> nums, int target){
+    sort(nums.begin(), nums.end());
+    int left = 0, right = nums.size() - 1;
+    int res = 0;
+    unordered_map<int, int> mp;
+    while(left < right){
+        if(right < nums.size() - 1 && nums[right] == nums[right + 1]){
+            res--;
+            right--;
+            if(nums[right] * 2 >= target){
+                mp[nums[right]] = 1;
+            }
+            continue;
+        }
+        int sum = nums[left] + nums[right];
+        if(sum >= target){
+            res += right - left;
+            right--;
+        }else{
+            left++;
+        }
+    }
+    res += mp.size();
+    return res;
+}
+```
+
+
+
 ## Union-Find
 
 
