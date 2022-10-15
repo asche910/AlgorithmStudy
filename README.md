@@ -1,4 +1,4 @@
-# AlgorithmStudy 
+# AlgorithmStudy
 
 Some common algorithms.
 
