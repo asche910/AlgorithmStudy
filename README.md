@@ -2,11 +2,7 @@
 
 Some common algorithms.
 
-
-
 ## Array
-
-
 
 ### Basic
 
@@ -20,14 +16,14 @@ class Solution {
         int len = nums.length, maxSum = 0;
         int[] sum = new int[len + 1], posLeft = new int[len], posRight = new int[len], res = new int[3];
         for(int i = 0; i < nums.length; i++) sum[i + 1] = sum[i] + nums[i]; 
-        
+      
         for(int i = k, cur = sum[k] - sum[0]; i < len - 2 * k; i++){
             if(sum[i + 1] - sum[i + 1 - k] > cur){
                 posLeft[i] = i + 1 - k;
                 cur = sum[i + 1] - sum[i + 1 - k];
             }else posLeft[i] = posLeft[i - 1];
         }
-        
+      
         posRight[len - k] = len- k;
         for(int i = len - k - 1, cur = sum[len] - sum[len - k]; i >= 2 * k; i--){
             if(sum[i + k] - sum[i] >= cur){
@@ -35,7 +31,7 @@ class Solution {
                 cur = sum[i + k] - sum[i];
             }else posRight[i] = posRight[i + 1];
         }
-        
+      
         for(int i = k; i <= len - 2 * k; i++){
             int l = posLeft[i - 1], r = posRight[i + k];
             int cur = (sum[i + k] - sum[i]) + (sum[l + k] - sum[l]) + (sum[r + k] - sum[r]);
@@ -51,10 +47,6 @@ class Solution {
 }
 
 ```
-
-### 
-
-
 
 ### 递增子序列
 
@@ -84,11 +76,9 @@ public:
 };
 ```
 
-巧解：使用tails数组，tails[i]表示长度为`i + 1`的所有最长上升子序列的结尾最小值（因此tails数组并不一定是最长子序列的值）。tails数组大小即为所求。O(n log n)
+巧解：使用tails数组，tails[i]表示长度为 `i + 1`的所有最长上升子序列的结尾最小值（因此tails数组并不一定是最长子序列的值）。tails数组大小即为所求。O(n log n)
 
 参考[这里](https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/)
-
-
 
 ```c++
 class Solution {
@@ -118,10 +108,6 @@ public:
 };
 ```
 
-
-
-
-
 #### [491. Increasing Subsequences](https://leetcode.com/problems/increasing-subsequences/)
 
 > 求数组中的递增子序列
@@ -145,7 +131,7 @@ class Solution {
             // 注意条件
             if(sub.size() == 0 || nums[i] >= sub.get(sub.size() - 1)){
                 set.add(nums[i]);
-                
+              
                 sub.add(nums[i]);
                 dfs(res, sub, nums, i + 1);
                 sub.remove(sub.size() - 1);
@@ -154,10 +140,6 @@ class Solution {
     }
 }
 ```
-
-
-
-
 
 #### [1395. Count Number of Teams](https://leetcode.com/problems/count-number-of-teams/)
 
@@ -212,19 +194,11 @@ class Solution {
 }
 ```
 
-
-
 ### 子序列问题
-
-
 
 #### [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/)
 
 最长回文串的长度
-
-
-
-
 
 ### 区间问题
 
@@ -260,8 +234,6 @@ public:
 };
 ```
 
-
-
 #### [452. 用最少数量的箭引爆气球](https://leetcode-cn.com/problems/minimum-number-of-arrows-to-burst-balloons/)
 
 尾部排序
@@ -286,12 +258,6 @@ public:
     }
 };
 ```
-
-
-
-
-
-
 
 #### [646. 最长数对链](https://leetcode-cn.com/problems/maximum-length-of-pair-chain/)
 
@@ -319,12 +285,6 @@ public:
 };
 ```
 
-
-
-
-
-
-
 ### 旋转数组
 
 #### 排序的旋转数组求目标值
@@ -334,8 +294,6 @@ public:
 > 旋转排序数组（无相同值）中，搜寻目标值。
 
 旋转数组中先找到递增的那部分，复杂情况用else来应对。
-
-
 
 ```c++
 class Solution {
@@ -363,8 +321,6 @@ public:
     }
 };
 ```
-
-
 
 ##### [81. 搜索旋转排序数组 II](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/)
 
@@ -397,12 +353,6 @@ public:
 };
 ```
 
-
-
-
-
-
-
 #### 排序的旋转数组求最小值
 
 ##### [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
@@ -425,12 +375,11 @@ public:
 };
 ```
 
-
-
 ##### [154. Find Minimum in Rotated Sorted Array II](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/)
+
 > 其中数组包含重复元素
 
-对于`[2,2,1]`用例，常规判断无效。
+对于 `[2,2,1]`用例，常规判断无效。
 
 必须判断两种确切的特殊情况。
 
@@ -452,18 +401,7 @@ public:
 };
 ```
 
-
-
-
-
-
 #### 山脉数组求目标值
-
-
-
-
-
-
 
 ## Binary Indexed Tree
 
@@ -473,11 +411,7 @@ public:
 
 并同时支持在 *O*(log *n*) 时间内支持动态单点值的修改
 
-
-
 https://www.cnblogs.com/xenny/p/9739600.html
-
-
 
 ```c++
 #include <bits/stdc++.h>
@@ -533,15 +467,9 @@ int main() {
 
 ```
 
-
-
-
-
-
-
 ## Bit Manipulation
 
-- ```-1 & n  --> n ```
+- ``-1 & n  --> n ``
   -1 & 1  --> 1
   -1 % 2  --> -1
 - `n & (n - 1)`将最右边一个1变为0
@@ -555,13 +483,11 @@ int main() {
 ```
 
 - `x | (1 << (i-1))`将第i位变为1
--  `~`为二进制取反运算符， `x ^ 0 = x` 、`x ^ 1 = -（~x）`
-
-
+- `~`为二进制取反运算符， `x ^ 0 = x` 、`x ^ 1 = -（~x）`
 
 ### 任意进制转换
 
-先转换成十进制，然后转换成目标进制
+先转换成十进制，然后转换成目标进制。
 
 ```c++
 // s 原数字，d1为s表示的进制，d2为转换的目标进制
@@ -593,19 +519,7 @@ string convert(string s, int d1, int d2) {
 
 ```
 
-
-
-
-
-
-
-
-
 ## Depth-first Search
-
-
-
-
 
 #### [526. Beautiful Arrangement](https://leetcode-cn.com/problems/beautiful-arrangement/)
 
@@ -658,6 +572,7 @@ public:
             return;
         }
         for (int i = cur; i < nums.size(); i++) {
+	          // if(i > cur && i < nums.size() && nums[i] == nums[i - 1]) continue; // 注意这里不能这样，即使一开始sort了。因为前面有很多swap，所以也是乱序的了
             if (!check(nums, cur, i)) continue;
             swap(nums[cur], nums[i]);
             dfs(nums, cur + 1);
@@ -674,13 +589,7 @@ public:
 };
 ```
 
-
-
-
-
 ### 指定和
-
-
 
 [39. Combination Sum](https://leetcode.com/problems/combination-sum/)
 
@@ -695,7 +604,7 @@ public:
          sort(candidates.begin(), candidates.end());
         return dfs(candidates, target, 0);
     }
-    
+  
     vector<vector<int>> dfs(vector<int>& nums, int target, int idx){
         vector<vector<int>> res;
         for(int i = idx; i < nums.size(); ++i){
@@ -718,27 +627,13 @@ public:
 
 ```
 
-
-
-
-
-
-
-
-
 ## Dynamic Programming
 
 [Here](./src/dp/README.md)
 
-
-
-
-
 ## Graph
 
 使用邻接表数组
-
-
 
 #### [207. 课程表](https://leetcode-cn.com/problems/course-schedule/)
 
@@ -778,19 +673,13 @@ public:
 };
 ```
 
-
-
-
-
 ## Greedy
-
-
 
 ### 求字典排序最小的结果
 
-使用**栈**，新进来的元素，先和栈顶比较，符合某种条件则弹出栈顶元素，再入栈
+使用**栈**，新进来的元素，先和栈顶比较，符合某种条件则弹出栈顶元素，再入栈 
 
-
+也有点像 **单调栈** 的思路。
 
 #### [316. 去除重复字母](https://leetcode-cn.com/problems/remove-duplicate-letters/)
 
@@ -815,10 +704,6 @@ public:
 ```
 
 插入一个字符时，想办法删除前面比自己大并且后面再次出现的字符。
-
-
-
-
 
 #### [402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)
 
@@ -848,12 +733,6 @@ public:
 };
 
 ```
-
-
-
-
-
-
 
 ### 相邻元素的约束
 
@@ -888,25 +767,11 @@ public:
 };
 ```
 
-
-
-
-
-
-
-
-
 ## Hash Table
-
-
-
-
 
 ### 连续子数组
 
 * 前缀和
-
-
 
 #### [560. 和为K的子数组](https://leetcode-cn.com/problems/subarray-sum-equals-k/)
 
@@ -935,17 +800,9 @@ public:
 
 [1248. 统计「优美子数组」](https://leetcode-cn.com/problems/count-number-of-nice-subarrays/)
 
-
-
-
-
 ## Heap
 
-
-
 ### 区间重叠
-
-
 
 #### 253. Meeting Rooms II
 
@@ -974,8 +831,6 @@ public:
 };
 
 ```
-
-
 
 ### TOP K问题
 
@@ -1011,18 +866,9 @@ public:
 };
 ```
 
-
-
-
-
-
-
 ## Math
 
-
-
-* 判断n是否是素数，判断`[2,sqrt(n)]`内的数是否能整除n
-
+* 判断n是否是素数，判断 `[2,sqrt(n)]`内的数是否能整除n
 * 1 = 1
   4 = 1 + 3
   9 = 1 + 3 + 5
@@ -1048,15 +894,7 @@ public:
     }
 ```
 
-
-
-
-
 ### 矩形相交
-
-
-
-
 
 #### [223. 矩形面积](https://leetcode-cn.com/problems/rectangle-area/)
 
@@ -1078,9 +916,10 @@ public:
 
 ### 快速幂
 
-
 #### 超级次方
+
 https://leetcode.cn/problems/super-pow/solution/gong-shui-san-xie-di-gui-kuai-su-mi-ying-yx1j/
+
 ```java
 class Solution {
     int MOD = 1337;
@@ -1104,14 +943,9 @@ class Solution {
 }
 ```
 
-
 ## Segment Tree
 
-
-
 **线段树**是一种二叉树形数据结构，用以存储区间或线段，并且允许快速查询结构内包含某一点的所有区间。
-
-
 
 ```c++
 class SegmentTreeNode {
@@ -1192,10 +1026,6 @@ int main() {
 }
 ```
 
-
-
-
-
 #### [307. 区域和检索 - 数组可修改](https://leetcode-cn.com/problems/range-sum-query-mutable/)
 
 ```c++
@@ -1229,17 +1059,9 @@ public:
 
 ```
 
-
-
-
-
 ## Stack
 
-
-
 * n个不同的数进栈，出栈顺序种数有：` C(2n, n) / (n + 1)`
-
- 
 
 ### 模拟操作
 
@@ -1260,17 +1082,9 @@ public:
     }
 ```
 
-
-
-
-
 ### 单调栈
 
-
-
 * 单调栈中，形成单调递增/减子序列
-
-
 
 #### [739. 每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
 
@@ -1295,8 +1109,6 @@ public:
     }
 };
 ```
-
-
 
 #### [逛街](https://www.nowcoder.com/questionTerminal/35fac8d69f314e958a150c141894ef6a)
 
@@ -1339,8 +1151,6 @@ int main() {
 }
 ```
 
-
-
 #### [456. 132 Pattern](https://leetcode.com/problems/132-pattern/)
 
 > 给定数组中，判断是否存在132模式。i < j < k，nums[i] < nums[k] < nums[j] 。
@@ -1365,8 +1175,6 @@ public:
     }
 };
 ```
-
-
 
 #### [84. 柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
 
@@ -1397,19 +1205,11 @@ public:
 };
 ```
 
-
-
-
-
 ### 括号问题
-
-
 
 #### [1249. 移除无效的括号](https://leetcode-cn.com/problems/minimum-remove-to-make-valid-parentheses/)
 
 > 给定一字符串（包含括号和字符），移除多余的括号，使括号有效，并且保留原来的字符。
-
-
 
 ```c++
 class Solution {
@@ -1439,11 +1239,7 @@ public:
 };
 ```
 
-
-
 ## String
-
-
 
 ### KMP
 
@@ -1481,17 +1277,9 @@ public:
 
 https://leetcode-cn.com/problems/repeated-substring-pattern/solution/459-zhong-fu-de-zi-zi-fu-chuan-kmpjing-dian-wen-ti/
 
-
-
-
-
 ## Tree
 
-
-
 ### 二叉树删除节点
-
-
 
 #### [1325. Delete Leaves With a Given Value](https://leetcode.com/problems/delete-leaves-with-a-given-value/)
 
@@ -1513,17 +1301,9 @@ class Solution {
 }
 ```
 
-
-
-
-
-
-
 ## Two Pointer
 
 双指针，条件判断中，指针移动是**减弱当前条件**的一方移动
-
-
 
 ### 二数和变种（>=）
 
@@ -1532,8 +1312,6 @@ class Solution {
 > {1, 4, 5, 2, 2, 7, 8, 7}, target = 12
 >
 > 有(4, 8), (5, 8), (7, 8), (5, 7), (7, 7)共五队，所以返回5
-
-
 
 ```c++
 int findPairCnt(vector<int> nums, int target){
@@ -1563,24 +1341,15 @@ int findPairCnt(vector<int> nums, int target){
 }
 ```
 
-
-
 ## Union-Find
-
-
 
 并查集，顾名思义，一个实现了合并和查询集合方法的数据结构。最常见的方式是用数组来实现。
 
 例如，节点 ① ② ③ ④，已知 ① 与 ② 相连， ② 与 ④ 相连，经过并查集操作，应该形成两个集合，其中一个集合是 {① ② ④}，另一个是 {③}。
 
-
-
-
-
 #### [684. 冗余连接](https://leetcode-cn.com/problems/redundant-connection/)
 
 > 输入一个图，该图由一个有着N个节点 (节点值不重复1, 2, ..., N) 的树及一条附加的边构成。附加的边的两个顶点包含在1到N中间，这条附加的边不属于树中已存在的边。返回一条可以删去的边，使得结果图是一个有着N个节点的树。
->
 
 无向图中，删除最早的边，该边原本就能够连通。
 
@@ -1604,10 +1373,6 @@ public:
     }
 };
 ```
-
-
-
-
 
 ## ZZZ
 
@@ -1643,8 +1408,6 @@ public static void main(String[] args) {
     }
 ```
 
-
-
 ### 最小的交换次数
 
 > 给定仅包含‘B’或‘G’的字符数组，可以相邻交换，求最小交换次数，使得‘B’和‘G’分别在两端（即彼此分开）。如“BBGGG”或“GGGBB”。
@@ -1668,21 +1431,9 @@ public static void main(String[] args) {
     }
 ```
 
-
-
-
-
-
-
 ## Other
 
-
-
-二叉树遍历，输入为数组非TreeNode时，可以使用`2 * i + 1`和`2 * i + 2`来遍历子节点。
-
-
-
-
+二叉树遍历，输入为数组非TreeNode时，可以使用 `2 * i + 1`和 `2 * i + 2`来遍历子节点。
 
 pair、vector可以作为map的key，但不能作为unordered_map的key
 
@@ -1691,14 +1442,7 @@ map<pair<int, int>, int> mp;
 mp[make_pair(1, 2)] = 11;
 ```
 
-
-
-
 [求不大于k的最大子数组和](https://www.quora.com/Given-an-array-of-integers-A-and-an-integer-k-find-a-subarray-that-contains-the-largest-sum-subject-to-a-constraint-that-the-sum-is-less-than-k)
-
-
-
-
 
 C++输入数组处理
 
@@ -1717,8 +1461,6 @@ int main() {
 }
 ```
 
-
-
 ```c++
     string str;
 	// 处理多行字符串（可能为空字符）
@@ -1729,4 +1471,3 @@ int main() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()){ }
 ```
-

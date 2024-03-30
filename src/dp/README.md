@@ -392,28 +392,44 @@ public:
 class Solution {
 public:
     int maxProfit(int k, vector<int>& prices) {
-        if (!prices.size()) return 0;
-        if (k >= prices.size() / 2) {
-            int maxsumval = 0;
-            for (int i = 1; i < prices.size(); i++)
-                if (prices[i] > prices[i - 1])
-                    maxsumval += prices[i] - prices[i - 1];
-            return maxsumval;
-        }
-        vector<int> sell(k + 1, 0), buy(k + 1, prices[0]);
-        for (int i = 1; i < prices.size(); i++) {
-            for (int t = 1; t <= k; t++) {
-                buy[t] = min(buy[t], prices[i] - sell[t - 1]);
-                sell[t] = max(sell[t], prices[i] - buy[t]);
+        vector<int> buy(k + 1, INT_MIN), sell(k + 1, 0);
+        for(int n: prices){
+            for(int i = 1; i <= k; i++){
+                buy[i] = max(buy[i], sell[i - 1] - n);
+                sell[i] = max(sell[i], buy[i] + n);
             }
         }
         return sell[k];
     }
 };
-
 ```
 
 
+
+
+
+#### [309. 买卖股票的最佳时机含冷冻期](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+
+> 无限次交易，不过卖出后的一天，不能接着买入
+
+
+
+在正常无限交易的基础上，有一天冷冻期，那就加一个变量，保存sell的上一个值。
+
+```c++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int buy = INT_MIN, pre_sell = 0, sell = 0;
+        for(int n: prices){
+            buy = max(buy, pre_sell - n);
+            pre_sell = sell;
+            sell = max(sell, buy + n);
+        }
+        return sell;
+    }
+};
+```
 
 
 
