@@ -572,7 +572,7 @@ public:
             return;
         }
         for (int i = cur; i < nums.size(); i++) {
-	          // if(i > cur && i < nums.size() && nums[i] == nums[i - 1]) continue; // 注意这里不能这样，即使一开始sort了。因为前面有很多swap，所以也是乱序的了
+	          // if(i > cur && i < nums.size() && nums[i] == nums[i - 1]) continue; //  注意这里不能这样，即使一开始sort了。因为前面有很多swap，所以也是乱序的了
             if (!check(nums, cur, i)) continue;
             swap(nums[cur], nums[i]);
             dfs(nums, cur + 1);
