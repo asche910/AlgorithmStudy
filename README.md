@@ -555,7 +555,9 @@ public:
 
 > 给定可能重复的数字序列，求所有不重复的全排列
 
-经典回溯算法
+经典回溯算法。
+
+由于swap了，无序，去重必须在当前循环中判断该值是否出现过。
 
 ```c++
 class Solution {
@@ -588,6 +590,46 @@ public:
     }
 };
 ```
+
+
+
+### 子集
+
+#### [90. 子集 II](https://leetcode.cn/problems/subsets-ii/)
+
+> 给定一数组，可能包含重复数字，求所有不重复的子集
+
+子集因为没有swap，所以都是有序的，去重可以和上一个值比较
+
+```c++
+class Solution {
+public:
+    void dfs(vector<vector<int>> &res, vector<int> temp, vector<int> &nums, int cur){
+        res.push_back(temp);
+        if(cur == nums.size()) return;
+        for(int i = cur; i < nums.size(); i++){
+            if(i > cur && nums[i] == nums[i - 1]) continue; // 有序的，可以直接和上一个比较
+            temp.push_back(nums[i]);
+            dfs(res, temp, nums, i + 1);
+            temp.pop_back();
+        }
+    }
+
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int> temp;
+        sort(nums.begin(), nums.end());
+        dfs(res, temp, nums, 0);
+        return res;
+    }
+};
+```
+
+
+
+
+
+
 
 ### 指定和
 
